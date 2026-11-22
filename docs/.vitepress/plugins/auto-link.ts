@@ -2,7 +2,10 @@
  * 自动内链插件
  *
  * 构建时扫描正文，把命中的词条替换成链接。规则：
- *   - 每个词条在每页只链第一次（维基类站点通行做法，避免满屏重复链接）
+ *   - 每个段落（含引用块、表格单元格、列表项）内，每个词条只链第一次。
+ *     段落之间互不占用配额：读者在任何一段看到名词，都能当场点过去。
+ *     （早期版本是「每页一次」，结果页首引言和基本信息表把配额吃光，
+ *      正文主体一条金线都没有，移动端读者根本点不了。）
  *   - 长词优先：「匹诺康尼危机」不会被拆成「匹诺康尼」+「危机」
  *   - 跳过标题、代码、已有链接内部
  *   - 不链当前页面自己，避免自指
@@ -45,12 +48,6 @@ export function autoLinkPlugin(md: MarkdownIt) {
     const selfSlug = rel.replace(/\.md$/, '')
     const selfDir = path.posix.dirname('/' + selfSlug)
 
-    let linked = env.__hqLinked as Set<string> | undefined
-    if (!linked) {
-      linked = new Set<string>()
-      env.__hqLinked = linked
-    }
-
     /**
      * 生成相对当前页面的链接。
      * 用相对路径而非绝对路径，有两个好处：
@@ -79,7 +76,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
       return open
     }
 
-    const splitText = (text: string) => {
+    const splitText = (text: string, linked: Set<string>) => {
       const out: InstanceType<typeof Token>[] = []
       let rest = text
 
@@ -87,7 +84,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
         let best: { idx: number; term: string; target: Target } | null = null
 
         for (const t of targets) {
-          if (linked!.has(t.term)) continue
+          if (linked.has(t.term)) continue
           if (t.slug === selfSlug) continue
           const idx = rest.indexOf(t.term)
           if (idx === -1) continue
@@ -110,7 +107,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
         out.push(linkToken(toHref(best.target.path)))
         out.push(textToken(best.term))
         out.push(new Token('link_close', 'a', -1))
-        linked!.add(best.term)
+        linked.add(best.term)
         rest = rest.slice(best.idx + best.term.length)
       }
 
@@ -125,6 +122,8 @@ export function autoLinkPlugin(md: MarkdownIt) {
       const prev = state.tokens[i - 1]
       if (prev && prev.type === 'heading_open') continue
 
+      // 配额按段落重置：一个 inline token ≈ 一个自然段 / 一个表格单元格 / 一个列表项
+      const linked = new Set<string>()
       const next: typeof token.children = []
       let inLink = 0
 
@@ -133,7 +132,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
         else if (child.type === 'link_close') inLink = Math.max(0, inLink - 1)
 
         if (child.type === 'text' && inLink === 0 && child.content) {
-          next.push(...splitText(child.content))
+          next.push(...splitText(child.content, linked))
         } else {
           next.push(child)
         }
