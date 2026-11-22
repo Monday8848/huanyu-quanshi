@@ -9,8 +9,8 @@ pageClass: home-page
 <h1 class="hq-title">寰宇<span class="accent">百科</span></h1>
 <p class="hq-sub">官方记载为骨，玩家推测为血。<br />一个词一条，按类归位，随时可查。</p>
 <div class="hq-actions">
-<a class="hq-btn" href="./characters/">开始查阅 <span>→</span></a>
-<a class="hq-btn ghost" href="./items/">物品总表</a>
+<a class="hq-btn" href="#categories">开始查阅 <span>→</span></a>
+<a class="hq-btn ghost" href="./tags">标签索引</a>
 </div>
 </div>
 <svg class="hq-astrolabe" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -31,7 +31,7 @@ pageClass: home-page
 </svg>
 </div>
 
-<div class="hq-cats">
+<div class="hq-cats" id="categories">
 <a class="hq-vol" href="./characters/">
 <span class="hq-num">01 / 人物</span>
 <h3>谁是谁</h3>

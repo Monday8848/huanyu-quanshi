@@ -5,6 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ---------- 1. 变量 ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --hq-bg: #0a0e1a;
   --hq-bg-deep: #070a13;
@@ -582,13 +586,14 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-btn.ghost {
-  border-color: rgba(232, 228, 217, 0.18);
-  color: var(--hq-text-2) !important;
+  border-color: rgba(212, 168, 75, 0.2);
+  color: rgba(232, 228, 217, 0.62) !important;
 }
 
 .hq-btn.ghost:hover {
-  border-color: rgba(232, 228, 217, 0.4);
-  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(212, 168, 75, 0.45);
+  color: var(--hq-text) !important;
+  background: rgba(212, 168, 75, 0.06);
   box-shadow: none;
 }
 
@@ -617,6 +622,7 @@ h1, h2, h3, h4, .hq-serif {
 
 /* 百科六类卡片 */
 .hq-cats {
+  scroll-margin-top: 88px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
