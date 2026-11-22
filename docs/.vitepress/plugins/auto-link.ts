@@ -2,9 +2,7 @@
  * 自动内链插件
  *
  * 构建时扫描正文，把命中的词条替换成链接。规则：
- *   - 每个段落（含引用块、表格单元格、列表项）内，每个词条只链第一次。
- *   - 同一词条全页最多 5 次（两字短词 3 次），只防同一个词反复刷屏；
- *     不设全页总数上限——读者在任何位置看到名词都应该能点。
+ *   - 不做数量限制：凡是命中词条的正文文本一律加链，同一页出现几次就链几次。
  *     段落之间互不占用配额：读者在任何一段看到名词，都能当场点过去。
  *     （早期版本是「每页一次」，结果页首引言和基本信息表把配额吃光，
  *      正文主体一条金线都没有，移动端读者根本点不了。）
@@ -50,20 +48,6 @@ export function autoLinkPlugin(md: MarkdownIt) {
     const selfSlug = rel.replace(/\.md$/, '')
     const selfDir = path.posix.dirname('/' + selfSlug)
 
-    // 页级配额：只限制单个词条的重复次数，不限制整页总数
-    let counts = env.__hqLinkCounts as Map<string, number> | undefined
-    if (!counts) {
-      counts = new Map<string, number>()
-      env.__hqLinkCounts = counts
-    }
-    const overLimit = (term: string) => {
-      const cap = term.length <= 2 ? 3 : 5
-      return (counts.get(term) || 0) >= cap
-    }
-    const countHit = (term: string) => {
-      counts.set(term, (counts.get(term) || 0) + 1)
-    }
-
     /**
      * 生成相对当前页面的链接。
      * 用相对路径而非绝对路径，有两个好处：
@@ -92,7 +76,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
       return open
     }
 
-    const splitText = (text: string, linked: Set<string>) => {
+    const splitText = (text: string) => {
       const out: InstanceType<typeof Token>[] = []
       let rest = text
 
@@ -100,9 +84,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
         let best: { idx: number; term: string; target: Target } | null = null
 
         for (const t of targets) {
-          if (linked.has(t.term)) continue
           if (t.slug === selfSlug) continue
-          if (overLimit(t.term)) continue
           const idx = rest.indexOf(t.term)
           if (idx === -1) continue
           // 位置更靠前优先；同位置时长词优先
@@ -124,8 +106,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
         out.push(linkToken(toHref(best.target.path)))
         out.push(textToken(best.term))
         out.push(new Token('link_close', 'a', -1))
-        linked.add(best.term)
-        countHit(best.term)
+
         rest = rest.slice(best.idx + best.term.length)
       }
 
@@ -140,8 +121,6 @@ export function autoLinkPlugin(md: MarkdownIt) {
       const prev = state.tokens[i - 1]
       if (prev && prev.type === 'heading_open') continue
 
-      // 配额按段落重置：一个 inline token ≈ 一个自然段 / 一个表格单元格 / 一个列表项
-      const linked = new Set<string>()
       const next: typeof token.children = []
       let inLink = 0
 
@@ -160,7 +139,7 @@ export function autoLinkPlugin(md: MarkdownIt) {
         }
 
         if (child.type === 'text' && inLink === 0 && child.content) {
-          next.push(...splitText(child.content, linked))
+          next.push(...splitText(child.content))
         } else {
           next.push(child)
         }
