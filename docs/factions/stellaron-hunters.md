@@ -7,8 +7,8 @@ aliases:
 tags:
   faction:
     - 星核猎手
-  group:
-    - 星核猎手
+  location:
+    - 匹诺康尼
 navbox:
   - hunters
 ---
