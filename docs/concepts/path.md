@@ -5,9 +5,6 @@ summary: 星神所行的道路，既是宇宙层面的法则，也是命途行�
 tags:
   group:
     - 星神与命途
-anchors:
-  - term: 命途行者
-    heading: 运作机制
 ---
 
 # 命途

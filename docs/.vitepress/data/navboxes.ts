@@ -70,6 +70,16 @@ const navboxes: Record<string, NavBox> = {
     ],
     note: '首领艾利欧从未正式登场。'
   },
+  family: {
+    title: '家族',
+    groups: [
+      {
+        label: '家系',
+        items: ['橡木家系', '猎犬家系', '苜蓿家系', '鸢尾花家系']
+      }
+    ],
+    note: '匹诺康尼由五大家系共治，官方尚未完整公开全部家系。'
+  },
   xianzhou: {
     title: '仙舟联盟',
     groups: [
