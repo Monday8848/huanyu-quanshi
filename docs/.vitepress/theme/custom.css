@@ -195,7 +195,7 @@ h1, h2, h3, h4, .hq-serif {
 /* 站名后挂副标，桌面端可见 */
 @media (min-width: 1024px) {
   .VPNavBarTitle .title::after {
-    content: '崩铁世界观考据手册';
+    content: '星穹铁道设定百科';
     margin-left: 14px;
     padding-left: 14px;
     border-left: 1px solid var(--hq-line);
@@ -615,6 +615,14 @@ h1, h2, h3, h4, .hq-serif {
   margin: 20px 0 60px;
 }
 
+/* 百科六类卡片 */
+.hq-cats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 24px 0 56px;
+}
+
 .hq-vol {
   position: relative;
   display: block;
@@ -741,6 +749,7 @@ h1, h2, h3, h4, .hq-serif {
   top: 0;
   height: 100%;
   width: 23%;
+  min-width: 26px;
   background: linear-gradient(90deg, var(--hq-gold-dim), var(--hq-gold));
   box-shadow: 0 0 10px rgba(212, 168, 75, 0.5);
 }
@@ -842,6 +851,11 @@ h1, h2, h3, h4, .hq-serif {
     grid-template-columns: 1fr;
   }
 
+  .hq-cats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
   .hq-title {
     font-size: clamp(46px, 14vw, 72px);
   }
@@ -855,6 +869,9 @@ h1, h2, h3, h4, .hq-serif {
 @media (max-width: 640px) {
   .vp-doc h1 { font-size: 1.9rem; }
   .vp-doc h2 { font-size: 1.3rem; margin-top: 2.4rem; }
+  .hq-cats {
+    grid-template-columns: 1fr;
+  }
   .hq-actions {
     width: 100%;
     flex-direction: column;
@@ -924,6 +941,12 @@ h1, h2, h3, h4, .hq-serif {
 
 .home-page .vp-doc .hq-progress {
   margin: 1.2rem 0 1.6rem;
+}
+
+/* 百科首页：压缩首屏高度，让六类入口尽早出现 */
+.home-page .hq-hero {
+  min-height: min(calc(100vh - var(--vp-nav-height, 64px) - 40px), 560px);
+  padding-bottom: 28px;
 }
 
 /* 首页容器：page layout 没有 .vp-doc，直接控制 VPPage */

@@ -4,9 +4,9 @@ const base = process.env.DOCS_BASE || '/'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: '寰宇全事',
-  titleTemplate: ':title · 崩铁世界观考据手册',
-  description: '《崩坏：星穹铁道》世界观考据手册',
+  title: '寰宇百科',
+  titleTemplate: ':title · 星穹铁道设定百科',
+  description: '《崩坏：星穹铁道》设定百科：官方记载为基准，玩家推测为补充',
   base,
   cleanUrls: true,
   lastUpdated: true,
@@ -18,74 +18,88 @@ export default defineConfig({
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['meta', { name: 'theme-color', content: '#0a0e1a' }],
-    ['meta', { name: 'apple-mobile-web-app-title', content: '寰宇全事' }],
+    ['meta', { name: 'apple-mobile-web-app-title', content: '寰宇百科' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:site_name', content: '寰宇全事' }],
-    ['meta', { property: 'og:title', content: '寰宇全事 · 崩铁世界观考据手册' }],
+    ['meta', { property: 'og:site_name', content: '寰宇百科' }],
+    ['meta', { property: 'og:title', content: '寰宇百科 · 星穹铁道设定百科' }],
     [
       'meta',
       {
         property: 'og:description',
-        content: '以社区考据与推测为主体的《崩坏：星穹铁道》世界观手册'
+        content: '以官方记载为基准、玩家推测为补充的《崩坏：星穹铁道》设定百科'
       }
     ]
   ],
 
   themeConfig: {
     logo: '/logo.svg',
-    siteTitle: '寰宇全事',
+    siteTitle: '寰宇百科',
 
     nav: [
-      { text: '卷首', link: '/preface' },
-      { text: '总论卷', link: '/volumes/overview/' },
-      { text: '阵营卷', link: '/volumes/factions/' },
-      { text: '附录卷', link: '/volumes/appendix/' },
-      {
-        text: '检索',
-        items: [
-          { text: '术语表', link: '/glossary' },
-          { text: '大事年表', link: '/timeline' },
-          { text: '人物与势力索引', link: '/index-figures' }
-        ]
-      }
+      { text: '人物', link: '/characters/' },
+      { text: '势力', link: '/factions/' },
+      { text: '地点', link: '/locations/' },
+      { text: '概念', link: '/concepts/' },
+      { text: '事件', link: '/events/' },
+      { text: '物品', link: '/items/' }
     ],
 
-    sidebar: [
-      {
-        text: '卷首',
-        items: [{ text: '编者说明', link: '/preface' }]
-      },
-      {
-        text: '总论卷 · 星神与命途',
-        items: [
-          { text: '卷首导语', link: '/volumes/overview/' },
-          { text: '第一章 星神', link: '/volumes/overview/aeons' },
-          { text: '第二章 命途', link: '/volumes/overview/paths' },
-          { text: '第三章 宇宙纪年', link: '/volumes/overview/chronology' }
-        ]
-      },
-      {
-        text: '阵营卷',
-        items: [
-          { text: '卷首导语', link: '/volumes/factions/' },
-          { text: '星际和平公司', link: '/volumes/factions/ipc' },
-          { text: '仙舟联盟', link: '/volumes/factions/xianzhou' },
-          { text: '家族', link: '/volumes/factions/family' }
-        ]
-      },
-      {
-        text: '附录卷',
-        items: [{ text: '未证实档案', link: '/volumes/appendix/' }]
-      },
-      {
-        text: '检索',
-        items: [
-          { text: '术语表', link: '/glossary' },
-          { text: '大事年表', link: '/timeline' },
-          { text: '人物与势力索引', link: '/index-figures' }
-        ]
-      }
-    ],
+    sidebar: {
+      '/characters/': [
+        {
+          text: '人物',
+          items: [
+            { text: '人物总览', link: '/characters/' },
+            { text: '砂金', link: '/characters/aventurine' }
+          ]
+        }
+      ],
+      '/factions/': [
+        {
+          text: '势力',
+          items: [
+            { text: '势力总览', link: '/factions/' },
+            { text: '星际和平公司', link: '/factions/ipc' }
+          ]
+        }
+      ],
+      '/locations/': [
+        {
+          text: '地点',
+          items: [
+            { text: '地点总览', link: '/locations/' },
+            { text: '匹诺康尼', link: '/locations/penacony' }
+          ]
+        }
+      ],
+      '/concepts/': [
+        {
+          text: '概念',
+          items: [
+            { text: '概念总览', link: '/concepts/' },
+            { text: '命途', link: '/concepts/path' }
+          ]
+        }
+      ],
+      '/events/': [
+        {
+          text: '事件',
+          items: [
+            { text: '事件总览', link: '/events/' },
+            { text: '匹诺康尼危机', link: '/events/penacony-crisis' }
+          ]
+        }
+      ],
+      '/items/': [
+        {
+          text: '物品',
+          items: [
+            { text: '物品总览', link: '/items/' },
+            { text: '星核', link: '/items/star-core' }
+          ]
+        }
+      ]
+    },
 
     search: {
       provider: 'local',
@@ -106,7 +120,7 @@ export default defineConfig({
     },
 
     outline: { label: '本页目录', level: [2, 3] },
-    docFooter: { prev: '上一卷', next: '下一卷' },
+    docFooter: { prev: '上一条', next: '下一条' },
     lastUpdated: { text: '最后更新于' },
     darkModeSwitchLabel: '主题',
     lightModeSwitchTitle: '切换到浅色模式',

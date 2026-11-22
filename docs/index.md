@@ -5,12 +5,12 @@ pageClass: home-page
 
 <div class="hq-hero">
 <div class="hq-hero-inner">
-<p class="hq-kicker">崩坏：星穹铁道 · 世界观考据手册</p>
-<h1 class="hq-title">寰宇<span class="accent">全事</span></h1>
-<p class="hq-sub">十八位星神，十六条命途，一列驶向群星的火车。<br />以社区考据为骨，以推测为血，编一条能从头读到尾的世界观长线。</p>
+<p class="hq-kicker">崩坏：星穹铁道 · 设定百科</p>
+<h1 class="hq-title">寰宇<span class="accent">百科</span></h1>
+<p class="hq-sub">官方记载为骨，玩家推测为血。<br />一个词一条，按类归位，随时可查。</p>
 <div class="hq-actions">
-<a class="hq-btn" href="./preface">开始阅读 <span>→</span></a>
-<a class="hq-btn ghost" href="./volumes/overview/">进入总论卷</a>
+<a class="hq-btn" href="./characters/">开始查阅 <span>→</span></a>
+<a class="hq-btn ghost" href="./items/">物品总表</a>
 </div>
 </div>
 <svg class="hq-astrolabe" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -31,58 +31,80 @@ pageClass: home-page
 </svg>
 </div>
 
-<div class="hq-volumes">
-<a class="hq-vol" href="./volumes/overview/">
-<span class="hq-num">01 / 总论</span>
-<h3>星神与命途</h3>
-<p>十八位星神逐条拆解，命途的运作法则，以及琥珀纪年表背后那笔算不清的账。</p>
-<span class="hq-arrow">进入卷宗 →</span>
+<div class="hq-cats">
+<a class="hq-vol" href="./characters/">
+<span class="hq-num">01 / 人物</span>
+<h3>谁是谁</h3>
+<p>自机角色与重量级 NPC，按所属势力分组。查到一个人的同时，也就看到了他的同僚和对手。</p>
+<span class="hq-arrow">1 条已收录 →</span>
 </a>
-<a class="hq-vol" href="./volumes/factions/">
-<span class="hq-num">02 / 阵营</span>
-<h3>势力与关系网</h3>
-<p>公司、仙舟联盟、家族。每卷五段式：速览、历史、架构、关系网、推测。</p>
-<span class="hq-arrow">进入卷宗 →</span>
+<a class="hq-vol" href="./factions/">
+<span class="hq-num">02 / 势力</span>
+<h3>谁在管谁</h3>
+<p>公司、仙舟联盟、家族、星核猎手、星穹列车。按影响力排序，条内附组织架构与关系网。</p>
+<span class="hq-arrow">1 条已收录 →</span>
 </a>
-<a class="hq-vol" href="./volumes/appendix/">
-<span class="hq-num">03 / 附录</span>
-<h3>未证实档案</h3>
-<p>传闻、假说与拆包碎片，按可信度分级，物理隔离。不是事实，是讨论的起点。</p>
-<span class="hq-arrow">进入卷宗 →</span>
+<a class="hq-vol" href="./locations/">
+<span class="hq-num">03 / 地点</span>
+<h3>故事在哪发生</h3>
+<p>星球与区域，按星球分组。地理、管辖势力、本地发生过的关键事件都收在一条里。</p>
+<span class="hq-arrow">1 条已收录 →</span>
+</a>
+<a class="hq-vol" href="./concepts/">
+<span class="hq-num">04 / 概念</span>
+<h3>名词是什么</h3>
+<p>星神、命途、令使、忆质。被设定术语绕晕的时候，从这里查起。</p>
+<span class="hq-arrow">1 条已收录 →</span>
+</a>
+<a class="hq-vol" href="./events/">
+<span class="hq-num">05 / 事件</span>
+<h3>发生过什么</h3>
+<p>主线章节级事件与重大历史事件，按时间顺序排列，每条标清时间、地点、参与方与后续影响。</p>
+<span class="hq-arrow">1 条已收录 →</span>
+</a>
+<a class="hq-vol" href="./items/">
+<span class="hq-num">06 / 物品</span>
+<h3>东西是什么</h3>
+<p>星核、星琼这类有来历的物件单独成条；光锥、遗器、材料收在总表里，可搜索筛选。</p>
+<span class="hq-arrow">1 条已收录 →</span>
 </a>
 </div>
 
 <div class="hq-section">
-<div class="hq-section-title"><span class="idx">01</span><h2>怎么读这本书</h2></div>
+<div class="hq-section-title"><span class="idx">01</span><h2>这本百科的写法</h2></div>
 
-| 你是谁 | 建议从哪读 |
-|--------|-----------|
-| 刚通完主线，想理清时间线 | [大事年表](./timeline) → [总论卷](./volumes/overview/) |
-| 想查某个势力的底细 | [阵营卷](./volumes/factions/) 对应单元 |
-| 被名词砸晕了 | [术语表](./glossary) |
-| 想看社区都在猜什么 | [附录卷 · 未证实档案](./volumes/appendix/) |
-| 想找某个人属于哪一方 | [人物与势力索引](./index-figures) |
+三条规则，所有条目都遵守：
+
+**一、官方记载是基准。** 游戏内文本（主线对话、书籍、角色故事、遗器与光锥文案、地图标记、短信）、官方 PV 与前瞻直播、官方公告与访谈——只有这些算「明确公布」的内容。拆包数据、内鬼爆料、玩家 wiki 一律不进正文。
+
+**二、推测混写，但会声明。** 玩家基于文本矛盾做出的合理推断，直接写进正文对应位置，读起来是连贯的；每个条目末尾统一声明「本文含玩家推测」，不做逐条标注。没有推理依据的猜测不收。
+
+**三、版本冲突并列。** 官方在不同版本里表述不一致时，两种说法都写出来并注明，不替官方圆场。
 
 </div>
 
 <div class="hq-section">
-<div class="hq-section-title"><span class="idx">02</span><h2>当前进度</h2></div>
+<div class="hq-section-title"><span class="idx">02</span><h2>怎么找到你要的东西</h2></div>
+
+| 你的情况 | 走这条路 |
+|----------|---------|
+| 记得名字（砂金、匹诺康尼、星核） | 右上角搜索，或直接 Ctrl K |
+| 只记得「某个公司/某个星球」 | 点顶部六大类 → 进分类总览 → 按分组找 |
+| 想知道某个词条和谁有关 | 每个条目底部都有「相关条目」，顺着一张网走下去 |
+| 想按时间顺序看发生了什么 | [事件总览](./events/) 按时间排列 |
+| 只想翻道具数据 | [物品总表](./items/) |
+
+</div>
+
+<div class="hq-section">
+<div class="hq-section-title"><span class="idx">03</span><h2>当前进度</h2></div>
 
 <div class="hq-progress">
-<span class="label">阵营收录 <b>3 / 13</b></span>
-<span class="bar"><span></span></span>
-<span class="label">骨架期 · 持续扩写</span>
+<span class="label">条目收录 <b>6 / 200</b></span>
+<span class="bar"><span style="width: 3%"></span></span>
+<span class="label">骨架期 · 六类样板已成</span>
 </div>
 
-总论卷与三个影响力最大的阵营单元已成篇，其余阵营按影响力顺序陆续补齐。内容跟随游戏大版本增量更新，小活动不追。
-
-</div>
-
-<div class="hq-section">
-<div class="hq-section-title"><span class="idx">03</span><h2>这本书的写法</h2></div>
-
-它不逐条抄录游戏文本，而是把散落在主线、支线、角色故事、遗器描述与活动里的信息揉碎了重组，再掺入中文社区几年来的考据与争论。
-
-所以你会在这里同时看到三种东西：**相对确定的事实**、**社区共识**、以及标在「推测区」里的**大胆假说**。推测不保证正确——它的价值在于给读者一个可以反驳的靶子。
+六类骨架与每类样板条目已上线，其余条目按「高频优先」顺序补齐。内容跟随游戏大版本增量更新，小活动不追。
 
 </div>
