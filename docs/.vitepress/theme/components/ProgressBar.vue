@@ -11,6 +11,6 @@ const pct = computed(() => Math.min(100, Math.max(1, Math.round((total.value / g
   <div class="hq-progress">
     <span class="label">条目收录 <b>{{ total }} / {{ goal }}</b></span>
     <span class="bar"><span :style="{ width: pct + '%' }"></span></span>
-    <span class="label">骨架期 · 六类样板已成</span>
+    <span class="label">骨架期 · 六类骨架已成</span>
   </div>
 </template>

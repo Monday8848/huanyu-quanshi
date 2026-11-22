@@ -49,6 +49,40 @@ const navboxes: Record<string, NavBox> = {
       }
     ],
     note: '其余成员官方尚未全部公开。'
+  },
+  train: {
+    title: '星穹列车',
+    groups: [
+      {
+        label: '乘员',
+        items: ['姬子', '瓦尔特', '丹恒', '三月七', '开拓者', '帕姆']
+      }
+    ],
+    note: '帕姆是列车长，不参与战斗。'
+  },
+  hunters: {
+    title: '星核猎手',
+    groups: [
+      {
+        label: '已知成员',
+        items: ['艾利欧', '卡芙卡', '刃', '银狼', '流萤']
+      }
+    ],
+    note: '首领艾利欧从未正式登场。'
+  },
+  xianzhou: {
+    title: '仙舟联盟',
+    groups: [
+      {
+        label: '仙舟',
+        items: ['罗浮', '朱明', '曜青', '方壶', '玉阙']
+      },
+      {
+        label: '机构',
+        items: ['云骑军', '十王司', '丹鼎司']
+      }
+    ],
+    note: '其余仙舟与机构官方着墨较少。'
   }
 }
 
