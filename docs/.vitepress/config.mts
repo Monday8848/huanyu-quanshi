@@ -46,9 +46,32 @@ const DIRS = [
 function buildSidebar() {
   const sidebar: Record<string, unknown[]> = {}
 
+  // 全站导航：不论当前在哪一页，都能回首页、切到任意分类、进标签索引。
+  // 移动端没有独立的顶部导航，抽屉就是唯一入口，这一组必须放在最上面。
+  const siteGroup = {
+    text: '全站导航',
+    items: [
+      { text: '首页', link: '/' },
+      ...DIRS.map(d => ({ text: d.label, link: `/${d.dir}/` })),
+      { text: '标签索引', link: '/tags/' }
+    ]
+  }
+
   for (const { dir, label, type, dims } of DIRS) {
     const count = data.typeIndex[type]?.items.length || 0
-    const items: unknown[] = [{ text: `${label}总览 ${count}`, link: `/${dir}/` }]
+
+    // 本类条目直接列进目录，不要让人先点总览再找
+    const own = data.entries
+      .filter(e => e.slug.startsWith(dir + '/'))
+      .map(e => ({ text: e.title, link: e.path }))
+
+    const groups: unknown[] = [
+      siteGroup,
+      {
+        text: `${label} · ${count} 条`,
+        items: [{ text: '总览', link: `/${dir}/` }, ...own]
+      }
+    ]
 
     // 当前目录下出现过的标签，每个维度按条目数取前 6 个
     const seen = new Map<string, { dim: string; name: string; count: number }>()
@@ -72,7 +95,7 @@ function buildSidebar() {
     for (const dim of dims) {
       const group = sorted.filter(t => t.dim === dim).slice(0, 6)
       if (!group.length) continue
-      items.push({
+      groups.push({
         text: `按${data.dims[dim] || dim}`,
         collapsed: false,
         items: group.map(t => ({
@@ -82,10 +105,11 @@ function buildSidebar() {
       })
     }
 
-    sidebar[`/${dir}/`] = [{ text: label, items }]
+    sidebar[`/${dir}/`] = groups
   }
 
   sidebar['/tags'] = [
+    siteGroup,
     {
       text: '标签索引',
       items: [
@@ -147,6 +171,7 @@ export default defineConfig({
     siteTitle: '寰宇百科',
 
     nav: [
+      { text: '首页', link: '/' },
       { text: '人物', link: '/characters/' },
       { text: '势力', link: '/factions/' },
       { text: '地点', link: '/locations/' },

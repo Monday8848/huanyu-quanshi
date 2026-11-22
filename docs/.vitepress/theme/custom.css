@@ -168,13 +168,16 @@ h1, h2, h3, h4, .hq-serif {
 /* ---------- 4. 导航 ---------- */
 .VPNav {
   background: rgba(10, 14, 26, 0.78) !important;
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
   border-bottom: 1px solid var(--hq-line-soft);
 }
 
+/* 模糊必须挂在 VPNavBar 上而不是 VPNav：
+   backdrop-filter 会让元素成为 fixed 子元素的包含块，
+   挂在 VPNav 上会把移动端 .VPNavScreen 压成 0 高（点菜单一片空白）。 */
 .VPNavBar {
   background: transparent !important;
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
 }
 
 .VPNavBarTitle .title {
