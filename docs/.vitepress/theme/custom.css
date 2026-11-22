@@ -1007,40 +1007,24 @@ h1, h2, h3, h4, .hq-serif {
    ============================================================ */
 .vp-doc a.hq-ilink,
 .vp-doc a.hq-ilink:visited {
-  color: #dcbb75;
+  color: inherit;
   text-decoration: none;
-  /* 用点线背景而不是 border-bottom：dash 段与间隔可以自己控制，
-     1px 虚线在手机高像素密度下容易被字形吃成看不见 */
-  background-image: linear-gradient(
-    to right,
-    rgba(212, 168, 75, 0.92) 0,
-    rgba(212, 168, 75, 0.92) 50%,
-    transparent 50%,
-    transparent 100%
-  );
-  background-repeat: repeat-x;
-  background-position: 0 100%;
-  background-size: 5px 1.5px;
-  padding-bottom: 2px;
-  transition: color 0.22s ease, text-shadow 0.22s ease;
+  border-bottom: 1px dashed rgba(212, 168, 75, 0.42);
+  transition: color 0.22s ease, border-color 0.22s ease, text-shadow 0.22s ease;
   cursor: pointer;
 }
 
 .vp-doc a.hq-ilink:hover {
   color: var(--hq-gold-soft);
-  background-image: linear-gradient(
-    to right,
-    var(--hq-gold) 0,
-    var(--hq-gold) 100%
-  );
-  background-size: 100% 1.5px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--hq-gold);
   text-shadow: 0 0 14px rgba(212, 168, 75, 0.3);
 }
 
 /* 打印时把内链还原成普通文字，避免满纸下划线 */
 @media print {
   .vp-doc a.hq-ilink {
-    background-image: none;
+    border-bottom: none;
     color: inherit;
     text-shadow: none;
   }
