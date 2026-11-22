@@ -128,8 +128,18 @@ export function autoLinkPlugin(md: MarkdownIt) {
       let inLink = 0
 
       for (const child of token.children) {
-        if (child.type === 'link_open') inLink++
-        else if (child.type === 'link_close') inLink = Math.max(0, inLink - 1)
+        if (child.type === 'link_open') {
+          inLink++
+          // 手写的站内链接（[匹诺康尼](../locations/penacony)）默认会吃
+          // VitePress 的品牌色，在正文里格外扎眼。统一补上 hq-ilink，
+          // 让手写链接和自动内链长得一模一样；外链与页内锚点保持原样。
+          const href = child.attrGet('href') || ''
+          if (href && !/^(?:https?:|mailto:|tel:|\/\/|#)/i.test(href)) {
+            child.attrJoin('class', 'hq-ilink')
+          }
+        } else if (child.type === 'link_close') {
+          inLink = Math.max(0, inLink - 1)
+        }
 
         if (child.type === 'text' && inLink === 0 && child.content) {
           next.push(...splitText(child.content, linked))

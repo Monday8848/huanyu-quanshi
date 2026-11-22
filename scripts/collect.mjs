@@ -87,11 +87,27 @@ for (const file of files) {
   })
 
   // 段落锚点：frontmatter 显式声明，避免把「加入公司」这类通用小节也变成词条
+  // 两种写法：
+  //   - 字符串：词条名与小节标题同名（anchors: [石心十人]）
+  //   - 对象：词条名与小节标题不同（anchors: [{ term: 星核猎手, heading: 与星核猎手的关系 }]）
   for (const a of data.anchors || []) {
     if (typeof a === 'string' && a.trim()) {
+      const name = a.trim()
       anchors.push({
-        title: a.trim(),
-        path: `${urlPath}#${a.trim()}`,
+        title: name,
+        heading: name,
+        path: `${urlPath}#${name}`,
+        parent: title,
+        parentSlug: slug
+      })
+    } else if (a && typeof a === 'object' && a.term) {
+      const name = String(a.term).trim()
+      const heading = String(a.heading || a.term).trim()
+      if (!name) continue
+      anchors.push({
+        title: name,
+        heading,
+        path: `${urlPath}#${heading}`,
         parent: title,
         parentSlug: slug
       })

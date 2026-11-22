@@ -7,6 +7,9 @@ tags:
     - 雅利洛-VI
   group:
     - 星神与命途
+anchors:
+  - term: 星核猎手
+    heading: 与星核猎手的关系
 ---
 
 # 星核
