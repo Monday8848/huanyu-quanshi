@@ -1182,6 +1182,17 @@ h1, h2, h3, h4, .hq-serif {
   border-bottom-color: rgba(212, 168, 75, 0.4);
 }
 
+.hq-navbox-items a.current {
+  color: var(--hq-gold);
+  cursor: default;
+}
+
+.hq-navbox-items a.current::before {
+  content: '▸ ';
+  font-size: 9px;
+  opacity: 0.7;
+}
+
 .hq-navbox-items .pending {
   color: var(--hq-text-3);
   opacity: 0.42;

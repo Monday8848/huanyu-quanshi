@@ -4,7 +4,9 @@ import { useData, withBase } from 'vitepress'
 import entriesData from '../../data/entries.json'
 import navboxes from '../../data/navboxes'
 
-const { frontmatter } = useData()
+const { frontmatter, page } = useData()
+
+const currentPath = computed(() => '/' + page.value.relativePath.replace(/\.md$/, ''))
 
 const groups = computed(() => {
   const tags = frontmatter.value.tags
@@ -40,7 +42,11 @@ const pathByTitle = computed(() => {
         <span class="hq-navbox-label">{{ g.label }}</span>
         <span class="hq-navbox-items">
           <template v-for="(it, i) in g.items" :key="it">
-            <a v-if="pathByTitle[it]" :href="withBase(pathByTitle[it])">{{ it }}</a>
+            <a
+              v-if="pathByTitle[it]"
+              :href="withBase(pathByTitle[it])"
+              :class="{ current: pathByTitle[it] === currentPath }"
+            >{{ it }}</a>
             <span v-else class="pending" :title="it + '（条目待补）'">{{ it }}</span>
             <i v-if="i < g.items.length - 1">·</i>
           </template>
