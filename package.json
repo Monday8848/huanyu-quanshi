@@ -2,14 +2,16 @@
   "name": "huanyu-quanshi",
   "version": "0.1.0",
   "private": true,
-  "description": "寰宇全事 —— 《崩坏：星穹铁道》世界观考据手册",
+  "description": "寰宇百科 —— 《崩坏：星穹铁道》设定百科",
   "type": "module",
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:dev": "node scripts/collect.mjs && vitepress dev docs",
+    "docs:build": "node scripts/collect.mjs && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "collect": "node scripts/collect.mjs"
   },
   "devDependencies": {
+    "gray-matter": "^4.0.3",
     "vitepress": "^1.6.4"
   }
 }

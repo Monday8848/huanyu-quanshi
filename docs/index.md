@@ -36,38 +36,43 @@ pageClass: home-page
 <span class="hq-num">01 / 人物</span>
 <h3>谁是谁</h3>
 <p>自机角色与重量级 NPC，按所属势力分组。查到一个人的同时，也就看到了他的同僚和对手。</p>
-<span class="hq-arrow">1 条已收录 →</span>
+<span class="hq-arrow"><EntryCount type="character" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./factions/">
 <span class="hq-num">02 / 势力</span>
 <h3>谁在管谁</h3>
 <p>公司、仙舟联盟、家族、星核猎手、星穹列车。按影响力排序，条内附组织架构与关系网。</p>
-<span class="hq-arrow">1 条已收录 →</span>
+<span class="hq-arrow"><EntryCount type="faction" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./locations/">
 <span class="hq-num">03 / 地点</span>
 <h3>故事在哪发生</h3>
 <p>星球与区域，按星球分组。地理、管辖势力、本地发生过的关键事件都收在一条里。</p>
-<span class="hq-arrow">1 条已收录 →</span>
+<span class="hq-arrow"><EntryCount type="location" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./concepts/">
 <span class="hq-num">04 / 概念</span>
 <h3>名词是什么</h3>
 <p>星神、命途、令使、忆质。被设定术语绕晕的时候，从这里查起。</p>
-<span class="hq-arrow">1 条已收录 →</span>
+<span class="hq-arrow"><EntryCount type="concept" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./events/">
 <span class="hq-num">05 / 事件</span>
 <h3>发生过什么</h3>
 <p>主线章节级事件与重大历史事件，按时间顺序排列，每条标清时间、地点、参与方与后续影响。</p>
-<span class="hq-arrow">1 条已收录 →</span>
+<span class="hq-arrow"><EntryCount type="event" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./items/">
 <span class="hq-num">06 / 物品</span>
 <h3>东西是什么</h3>
 <p>星核、星琼这类有来历的物件单独成条；光锥、遗器、材料收在总表里，可搜索筛选。</p>
-<span class="hq-arrow">1 条已收录 →</span>
+<span class="hq-arrow"><EntryCount type="item" /> 条已收录 →</span>
 </a>
+</div>
+
+<div class="hq-hot">
+<p class="hq-hot-label">按主题进入</p>
+<TagCloud />
 </div>
 
 <div class="hq-section">
@@ -89,8 +94,8 @@ pageClass: home-page
 | 你的情况 | 走这条路 |
 |----------|---------|
 | 记得名字（砂金、匹诺康尼、星核） | 右上角搜索，或直接 Ctrl K |
-| 只记得「某个公司/某个星球」 | 点顶部六大类 → 进分类总览 → 按分组找 |
-| 想知道某个词条和谁有关 | 每个条目底部都有「相关条目」，顺着一张网走下去 |
+| 只记得「某个公司/某个星球」 | 点顶部六大类，或直接翻[标签索引](./tags) |
+| 想知道某个词条和谁有关 | 每个条目底部都有分类标签，点标签顺着一张网走下去 |
 | 想按时间顺序看发生了什么 | [事件总览](./events/) 按时间排列 |
 | 只想翻道具数据 | [物品总表](./items/) |
 
@@ -99,11 +104,7 @@ pageClass: home-page
 <div class="hq-section">
 <div class="hq-section-title"><span class="idx">03</span><h2>当前进度</h2></div>
 
-<div class="hq-progress">
-<span class="label">条目收录 <b>6 / 200</b></span>
-<span class="bar"><span style="width: 3%"></span></span>
-<span class="label">骨架期 · 六类样板已成</span>
-</div>
+<ProgressBar />
 
 六类骨架与每类样板条目已上线，其余条目按「高频优先」顺序补齐。内容跟随游戏大版本增量更新，小活动不追。
 

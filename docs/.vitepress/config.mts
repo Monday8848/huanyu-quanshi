@@ -1,6 +1,105 @@
 import { defineConfig } from 'vitepress'
+import fs from 'node:fs'
+import { autoLinkPlugin } from './plugins/auto-link'
 
 const base = process.env.DOCS_BASE || '/'
+
+/* ---------- 构建期读取条目数据，生成侧栏 ---------- */
+
+const DATA_FILE = new URL('./data/entries.json', import.meta.url)
+
+type Entry = {
+  slug: string
+  path: string
+  title: string
+  type: string
+  tags: Record<string, string[]>
+}
+
+type EntriesData = {
+  total: number
+  dims: Record<string, string>
+  entries: Entry[]
+  tagIndex: Record<string, Record<string, string[]>>
+  typeIndex: Record<string, { label: string; items: string[] }>
+}
+
+function loadData(): EntriesData {
+  try {
+    return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8')) as EntriesData
+  } catch {
+    return { total: 0, dims: {}, entries: [], tagIndex: {}, typeIndex: {} }
+  }
+}
+
+const data = loadData()
+
+const DIRS = [
+  { dir: 'characters', label: '人物', type: 'character', dims: ['faction', 'location'] },
+  { dir: 'factions', label: '势力', type: 'faction', dims: ['path', 'group'] },
+  { dir: 'locations', label: '地点', type: 'location', dims: ['location', 'faction'] },
+  { dir: 'concepts', label: '概念', type: 'concept', dims: ['group'] },
+  { dir: 'events', label: '事件', type: 'event', dims: ['location', 'faction'] },
+  { dir: 'items', label: '物品', type: 'item', dims: ['group', 'location'] }
+]
+
+function buildSidebar() {
+  const sidebar: Record<string, unknown[]> = {}
+
+  for (const { dir, label, type, dims } of DIRS) {
+    const count = data.typeIndex[type]?.items.length || 0
+    const items: unknown[] = [{ text: `${label}总览 ${count}`, link: `/${dir}/` }]
+
+    // 当前目录下出现过的标签，每个维度按条目数取前 6 个
+    const seen = new Map<string, { dim: string; name: string; count: number }>()
+    for (const e of data.entries) {
+      if (!e.slug.startsWith(dir + '/')) continue
+      for (const dim of dims) {
+        for (const name of e.tags?.[dim] || []) {
+          const key = dim + '\u0000' + name
+          const hit = seen.get(key)
+          if (hit) hit.count++
+          else seen.set(key, { dim, name, count: 1 })
+        }
+      }
+    }
+
+    const sorted = [...seen.values()].sort(
+      (a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh')
+    )
+
+    // 严格按 dims 声明顺序分组，组内按条目数排序
+    for (const dim of dims) {
+      const group = sorted.filter(t => t.dim === dim).slice(0, 6)
+      if (!group.length) continue
+      items.push({
+        text: `按${data.dims[dim] || dim}`,
+        collapsed: false,
+        items: group.map(t => ({
+          text: `${t.name} ${t.count}`,
+          link: `/tags/#tag-${encodeURIComponent(t.name)}`
+        }))
+      })
+    }
+
+    sidebar[`/${dir}/`] = [{ text: label, items }]
+  }
+
+  sidebar['/tags'] = [
+    {
+      text: '标签索引',
+      items: [
+        { text: '全部标签', link: '/tags/' },
+        ...Object.entries(data.dims).map(([dim, dimLabel]) => ({
+          text: `${dimLabel}（${Object.keys(data.tagIndex[dim] || {}).length}）`,
+          link: `/tags/#dim-${dim}`
+        }))
+      ]
+    }
+  ]
+
+  return sidebar
+}
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -31,6 +130,18 @@ export default defineConfig({
     ]
   ],
 
+  markdown: {
+    config: md => {
+      md.use(autoLinkPlugin)
+    }
+  },
+
+  // 百科条目之间没有线性顺序，全站关掉「上一条 / 下一条」
+  transformPageData(pageData) {
+    pageData.frontmatter.prev = false
+    pageData.frontmatter.next = false
+  },
+
   themeConfig: {
     logo: '/logo.svg',
     siteTitle: '寰宇百科',
@@ -41,65 +152,11 @@ export default defineConfig({
       { text: '地点', link: '/locations/' },
       { text: '概念', link: '/concepts/' },
       { text: '事件', link: '/events/' },
-      { text: '物品', link: '/items/' }
+      { text: '物品', link: '/items/' },
+      { text: '标签', link: '/tags/' }
     ],
 
-    sidebar: {
-      '/characters/': [
-        {
-          text: '人物',
-          items: [
-            { text: '人物总览', link: '/characters/' },
-            { text: '砂金', link: '/characters/aventurine' }
-          ]
-        }
-      ],
-      '/factions/': [
-        {
-          text: '势力',
-          items: [
-            { text: '势力总览', link: '/factions/' },
-            { text: '星际和平公司', link: '/factions/ipc' }
-          ]
-        }
-      ],
-      '/locations/': [
-        {
-          text: '地点',
-          items: [
-            { text: '地点总览', link: '/locations/' },
-            { text: '匹诺康尼', link: '/locations/penacony' }
-          ]
-        }
-      ],
-      '/concepts/': [
-        {
-          text: '概念',
-          items: [
-            { text: '概念总览', link: '/concepts/' },
-            { text: '命途', link: '/concepts/path' }
-          ]
-        }
-      ],
-      '/events/': [
-        {
-          text: '事件',
-          items: [
-            { text: '事件总览', link: '/events/' },
-            { text: '匹诺康尼危机', link: '/events/penacony-crisis' }
-          ]
-        }
-      ],
-      '/items/': [
-        {
-          text: '物品',
-          items: [
-            { text: '物品总览', link: '/items/' },
-            { text: '星核', link: '/items/star-core' }
-          ]
-        }
-      ]
-    },
+    sidebar: buildSidebar(),
 
     search: {
       provider: 'local',

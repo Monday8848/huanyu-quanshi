@@ -1,11 +1,34 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
+import { h } from 'vue'
 import { onMounted, watch } from 'vue'
 import { useRoute } from 'vitepress'
+import EntryFooter from './components/EntryFooter.vue'
+import EntryList from './components/EntryList.vue'
+import EntryCount from './components/EntryCount.vue'
+import ProgressBar from './components/ProgressBar.vue'
+import TagCloud from './components/TagCloud.vue'
+import TagIndex from './components/TagIndex.vue'
 import './custom.css'
 
 export default {
   extends: DefaultTheme,
+
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      // 标签行、导航框与文末声明统一由组件渲染，条目页无需手写
+      'doc-after': () => h(EntryFooter)
+    })
+  },
+
+  enhanceApp({ app }) {
+    app.component('EntryList', EntryList)
+    app.component('EntryCount', EntryCount)
+    app.component('ProgressBar', ProgressBar)
+    app.component('TagCloud', TagCloud)
+    app.component('TagIndex', TagIndex)
+  },
+
   setup() {
     const route = useRoute()
     let io: IntersectionObserver | null = null
@@ -17,7 +40,7 @@ export default {
 
       io?.disconnect()
       io = new IntersectionObserver(
-        (entries) => {
+        entries => {
           for (const entry of entries) {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-in')
@@ -38,7 +61,7 @@ export default {
         '.hq-progress'
       ].join(',')
 
-      document.querySelectorAll(selector).forEach((el) => {
+      document.querySelectorAll(selector).forEach(el => {
         if (el.classList.contains('reveal')) return
         el.classList.add('reveal')
         io?.observe(el)
