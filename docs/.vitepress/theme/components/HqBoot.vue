@@ -12,19 +12,13 @@ let removeTimer = null
 
 onMounted(() => {
   if (typeof window === 'undefined') return
-  // 每个会话只在首次进入站点时出现一次
-  if (sessionStorage.getItem('hq-booted')) return
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    sessionStorage.setItem('hq-booted', '1')
-    return
-  }
 
+  // 每次整页加载（打开或刷新）播放一次；站内路由切换不重新挂载，不会重复
   pick.value = pool[Math.floor(Math.random() * pool.length)]
   show.value = true
-  sessionStorage.setItem('hq-booted', '1')
 
-  hideTimer = setTimeout(() => { leaving.value = true }, 560)
-  removeTimer = setTimeout(() => { show.value = false }, 940)
+  hideTimer = setTimeout(() => { leaving.value = true }, 900)
+  removeTimer = setTimeout(() => { show.value = false }, 1280)
 })
 
 const dismiss = () => {
