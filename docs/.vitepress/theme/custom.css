@@ -1478,3 +1478,190 @@ h1, h2, h3, h4, .hq-serif {
     padding: 7px 12px;
   }
 }
+
+/* ---------------------------------------------------------------
+   18. 官方表情、站主 UID 与首次加载层
+   --------------------------------------------------------------- */
+
+.hq-owner {
+  margin: 26px 0 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: rgba(232, 228, 217, 0.3);
+}
+
+.hq-owner span {
+  margin-left: 8px;
+  color: rgba(212, 168, 75, 0.64);
+}
+
+.hq-emoji {
+  display: block;
+  width: var(--hq-emoji-size, 96px);
+  height: auto;
+  transform: rotate(var(--hq-emoji-rot, 0deg));
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), filter 0.4s ease, opacity 0.34s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hq-emoji:hover {
+  transform: rotate(calc(var(--hq-emoji-rot, 0deg) * 0.35)) translateY(-5px) scale(1.04);
+  filter: drop-shadow(0 12px 26px rgba(212, 168, 75, 0.18));
+}
+
+.hq-emoji-fade.is-hidden {
+  opacity: 0;
+}
+
+/* 首屏右下角的贴纸：不参与布局，鼠标移上去才轻微抬身 */
+.hq-hero-sticker {
+  position: absolute;
+  right: clamp(16px, 4.5vw, 64px);
+  bottom: clamp(14px, 3vh, 42px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hq-hero-sticker .hq-emoji {
+  pointer-events: auto;
+  opacity: 0.94;
+}
+
+.hq-credit {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  color: rgba(232, 228, 217, 0.24);
+}
+
+/* 404 */
+
+.hq-404 {
+  min-height: calc(100vh - var(--vp-nav-height, 64px) - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 24px 80px;
+}
+
+.hq-404-emoji {
+  margin-bottom: 4px;
+}
+
+.hq-404-code {
+  margin: 0 0 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.42em;
+  color: var(--hq-gold);
+}
+
+.hq-404-title {
+  margin: 0 0 12px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(23px, 4vw, 33px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--hq-text);
+}
+
+.hq-404-sub {
+  margin: 0 0 30px;
+  font-size: 14px;
+  color: var(--hq-text-2);
+}
+
+.hq-404-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* 首次进入站点的极简加载层：一个会话只出现一次，可点击跳过 */
+
+.hq-boot {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #0a0e1a;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.36s ease, visibility 0.36s ease;
+}
+
+.hq-boot.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hq-boot-emoji {
+  width: 88px;
+  height: 88px;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 10px 26px rgba(212, 168, 75, 0.16));
+  animation: hq-boot-in 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@keyframes hq-boot-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) rotate(-11deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(-4deg) scale(1);
+  }
+}
+
+.hq-boot-text {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  color: rgba(232, 228, 217, 0.36);
+}
+
+@media (max-width: 768px) {
+  .hq-hero-sticker {
+    right: 6px;
+    bottom: 2px;
+  }
+
+  .hq-hero-sticker .hq-emoji {
+    width: 92px;
+  }
+
+  .hq-404-emoji .hq-emoji {
+    width: 118px;
+  }
+
+  .hq-boot-emoji {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hq-emoji,
+  .hq-emoji:hover {
+    transition: none;
+  }
+
+  .hq-boot {
+    display: none;
+  }
+}

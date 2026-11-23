@@ -9,6 +9,10 @@ import EntryCount from './components/EntryCount.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import TagCloud from './components/TagCloud.vue'
 import TagIndex from './components/TagIndex.vue'
+import HqEmoji from './components/HqEmoji.vue'
+import HqRandomEmoji from './components/HqRandomEmoji.vue'
+import HqBoot from './components/HqBoot.vue'
+import NotFound from './components/NotFound.vue'
 import './custom.css'
 
 export default {
@@ -16,6 +20,10 @@ export default {
 
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      // 首次进入站点时的极简加载层（每个会话一次）
+      'layout-top': () => h(HqBoot),
+      // 自定义 404：主题内置的 not-found 插槽
+      'not-found': () => h(NotFound),
       // 标签行、导航框与文末声明统一由组件渲染，条目页无需手写
       'doc-after': () => h(EntryFooter)
     })
@@ -27,6 +35,8 @@ export default {
     app.component('ProgressBar', ProgressBar)
     app.component('TagCloud', TagCloud)
     app.component('TagIndex', TagIndex)
+    app.component('HqEmoji', HqEmoji)
+    app.component('HqRandomEmoji', HqRandomEmoji)
   },
 
   setup() {

@@ -12,6 +12,7 @@ pageClass: home-page
 <a class="hq-btn" href="#categories">开始查阅 <span>→</span></a>
 <a class="hq-btn ghost" href="./tags">标签索引</a>
 </div>
+<p class="hq-owner">站主 UID <span>110325153</span></p>
 </div>
 <svg class="hq-astrolabe" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <circle cx="210" cy="210" r="196" stroke="#D4A84B" stroke-opacity="0.16"/>
@@ -29,6 +30,9 @@ pageClass: home-page
 <circle cx="96" cy="286" r="2.5" fill="#D4A84B" fill-opacity="0.8"/>
 <circle cx="300" cy="310" r="2" fill="#6B7F9E"/>
 </svg>
+<div class="hq-hero-sticker">
+<HqEmoji name="hyacine-happy" :size="132" :rotate="6" alt="风堇 · 官方表情" />
+</div>
 </div>
 
 <div class="hq-cats" id="categories">
@@ -109,3 +113,5 @@ pageClass: home-page
 六类骨架已完成，当前收录 <EntryCount of="total" /> 条，覆盖黑塔空间站、雅利洛-VI、仙舟罗浮、匹诺康尼四条主线的人物、势力、地点、概念、事件与物品。其余条目按「高频优先」顺序补齐，内容跟随游戏大版本增量更新，小活动不追。
 
 </div>
+
+<p class="hq-credit">表情素材取自《崩坏：星穹铁道》官方「帕姆展览馆」，版权归米哈游所有，本站仅作非商业展示。</p>
