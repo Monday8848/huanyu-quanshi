@@ -18,7 +18,7 @@ import type MarkdownIt from 'markdown-it'
 const here = path.dirname(fileURLToPath(import.meta.url))
 const dataFile = path.resolve(here, '../data/entries.json')
 
-type Target = { term: string; path: string; kind: 'entry' | 'anchor'; slug: string }
+type Target = { term: string; path: string; kind: 'entry' | 'anchor' | 'skip'; slug: string }
 
 let cached: Target[] | null = null
 
@@ -103,9 +103,14 @@ export function autoLinkPlugin(md: MarkdownIt) {
         }
 
         if (best.idx > 0) out.push(textToken(rest.slice(0, best.idx)))
-        out.push(linkToken(toHref(best.target.path)))
+        // 保护词：只吞掉，不链接（如宝石名「砂金石」不该指向人物「砂金」）
+        if (best.target.kind !== 'skip') {
+          out.push(linkToken(toHref(best.target.path)))
+        }
         out.push(textToken(best.term))
-        out.push(new Token('link_close', 'a', -1))
+        if (best.target.kind !== 'skip') {
+          out.push(new Token('link_close', 'a', -1))
+        }
 
         rest = rest.slice(best.idx + best.term.length)
       }

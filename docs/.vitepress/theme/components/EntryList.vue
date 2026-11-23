@@ -29,7 +29,10 @@ function subTags(entry) {
   const out = []
   for (const [dim, label] of Object.entries(dimLabels)) {
     const list = entry.tags?.[dim]
-    if (Array.isArray(list) && list.length) out.push({ dim, label, text: list.join(' · ') })
+    if (!Array.isArray(list) || !list.length) continue
+    // 上级名称已由 is-child 的「隶属」标记表达，标签行里不再重复
+    const rest = entry.parent ? list.filter(t => t !== entry.parent) : list
+    if (rest.length) out.push({ dim, label, text: rest.join(' · ') })
   }
   return out
 }
@@ -37,9 +40,10 @@ function subTags(entry) {
 
 <template>
   <div v-if="items.length" class="hq-elist" :class="{ 'is-grouped': group }">
-    <a v-for="e in items" :key="e.slug" class="hq-erow" :href="withBase(e.path)">
+    <a v-for="e in items" :key="e.slug" class="hq-erow" :class="{ 'is-child': e.parentSlug }" :href="withBase(e.path)">
       <span class="hq-erow-head">
         <span class="hq-erow-name">{{ e.title }}</span>
+        <span v-if="e.parent" class="hq-erow-parent">隶属 · {{ e.parent }}</span>
         <span v-for="s in subTags(e)" :key="s.dim" class="hq-erow-tag">{{ s.text }}</span>
       </span>
       <span v-if="e.summary" class="hq-erow-sum">{{ e.summary }}</span>

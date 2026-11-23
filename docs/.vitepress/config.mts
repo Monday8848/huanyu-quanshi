@@ -61,9 +61,11 @@ function buildSidebar() {
     const count = data.typeIndex[type]?.items.length || 0
 
     // 本类条目直接列进目录，不要让人先点总览再找
+    // 下属组织（parentSlug 非空）在 entries 中已紧跟上级，这里只加缩进前缀，
+    // 避免「石心十人」这类部门与「星际和平公司」在目录里看起来平级。
     const own = data.entries
       .filter(e => e.slug.startsWith(dir + '/'))
-      .map(e => ({ text: e.title, link: e.path }))
+      .map(e => ({ text: e.parentSlug ? `　└ ${e.title}` : e.title, link: e.path }))
 
     const groups: unknown[] = [
       siteGroup,

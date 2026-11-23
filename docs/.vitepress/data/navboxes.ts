@@ -7,8 +7,9 @@
  * items 里的名称如果站内已有条目，会自动变成链接；没有则渲染为灰色待补项。
  */
 export interface NavBoxGroup {
+  // 字符串 = 词条名（自动查表）；对象 = 显式链接（用于尚未成条但有锚点的对象）
+  items: (string | { text: string; link: string })[]
   label: string
-  items: string[]
 }
 
 export interface NavBox {
@@ -24,31 +25,46 @@ const navboxes: Record<string, NavBox> = {
       {
         label: '七部门',
         items: [
-          '战略投资部',
-          '市场开拓部',
-          '业务巩固部',
-          '技术研发部',
-          '人才激励部',
-          '传统项目部',
-          '筑材物流部'
+          { text: '战略投资部', link: '/factions/ipc#七部门' },
+          { text: '市场开拓部', link: '/factions/ipc#七部门' },
+          { text: '业务巩固部', link: '/factions/ipc#七部门' },
+          { text: '技术研发部', link: '/factions/ipc#七部门' },
+          { text: '人才激励部', link: '/factions/ipc#七部门' },
+          { text: '传统项目部', link: '/factions/ipc#七部门' },
+          { text: '筑材物流部', link: '/factions/ipc#七部门' }
         ]
       },
       {
         label: '石心十人',
-        items: ['钻石', '砂金', '托帕', '翡翠', '真珠']
+        items: ['钻石', '砂金', '托帕', '翡翠', '真珠', '舒俱', '欧泊', '龙晶']
       }
     ],
-    note: '石心十人其余成员官方尚未全部公开。'
+    note: '十人全名单与逐人档案见「石心十人」。'
   },
   stonehearts: {
     title: '石心十人',
     groups: [
       {
-        label: '已知成员',
-        items: ['钻石', '砂金', '托帕', '翡翠', '真珠']
+        label: '主管',
+        items: ['钻石']
+      },
+      {
+        label: '成员',
+        items: [
+          '托帕',
+          '砂金',
+          '翡翠',
+          '真珠',
+          '舒俱',
+          '欧泊',
+          '龙晶',
+          { text: '苍刚', link: '/factions/stonehearts#逐人档案' },
+          { text: '玛瑙', link: '/factions/stonehearts#逐人档案' },
+          { text: '琥珀', link: '/factions/stonehearts#逐人档案' }
+        ]
       }
     ],
-    note: '其余成员官方尚未全部公开。'
+    note: '十人名单出自千星纪游 PV「石心誓环·天平两端」。苍刚、玛瑙、琥珀暂无独立条目。'
   },
   train: {
     title: '星穹列车',

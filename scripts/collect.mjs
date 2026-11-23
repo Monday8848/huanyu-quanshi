@@ -85,6 +85,9 @@ for (const file of files) {
     aliases: Array.isArray(data.aliases) ? data.aliases.filter(Boolean) : [],
     // 普通词汇组成的角色名（如「火花」）不参与自动内链，避免满页误链
     noLink: Boolean(data.noLink),
+    // 隶属关系：下属组织在索引与侧栏中缩进挂在上级之下，不再与上级并列
+    parent: typeof data.parent === 'string' ? data.parent.trim() : '',
+    parentSlug: '',
     tags
   })
 
@@ -119,6 +122,49 @@ for (const file of files) {
 
 // 拼音排序
 entries.sort((a, b) => collator.compare(a.title, b.title))
+
+// 隶属关系：解析 parent 标题 → slug。找不到就报警，避免写错上级名却静默失效。
+const byTitle = new Map()
+for (const e of entries) {
+  if (!byTitle.has(e.title)) byTitle.set(e.title, e)
+}
+for (const e of entries) {
+  if (!e.parent) continue
+  const p = byTitle.get(e.parent)
+  if (!p) {
+    console.warn(`[collect] 「${e.title}」的上级「${e.parent}」找不到对应词条，已忽略`)
+    e.parent = ''
+    continue
+  }
+  if (p.slug === e.slug) {
+    e.parent = ''
+    continue
+  }
+  e.parentSlug = p.slug
+}
+
+// 索引顺序：上级后紧跟其下属，形成「父 → 子」块，不再全站平铺并列。
+// 顶层按拼音，同一上级下也按拼音；递归处理多级隶属。
+const childrenOf = new Map()
+for (const e of entries) {
+  const key = e.parentSlug || '\u0000root'
+  if (!childrenOf.has(key)) childrenOf.set(key, [])
+  childrenOf.get(key).push(e)
+}
+
+const ordered = []
+const visited = new Set()
+function emit(e) {
+  if (visited.has(e.slug)) return
+  visited.add(e.slug)
+  ordered.push(e)
+  for (const c of childrenOf.get(e.slug) || []) emit(c)
+}
+for (const e of childrenOf.get('\u0000root') || []) emit(e)
+// 兜底：父链成环的条目也不能丢
+for (const e of entries) emit(e)
+entries.length = 0
+entries.push(...ordered)
 
 // 标签索引：维度 → 标签名 → 条目 slug 列表
 const tagIndex = {}
@@ -168,6 +214,32 @@ for (const e of entries) {
 for (const a of anchors) {
   pushTerm(a.title, a.path, 'anchor', a.parentSlug)
 }
+
+/**
+ * 保护词：包含词条名、但语义完全不同的更长词。
+ * 例如「砂金石」是宝石，不是「砂金」这个人；「托帕石」同理。
+ * 这些词参与最长匹配并原样输出，不生成链接，避免把宝石名拆成「人名 + 石」。
+ */
+const PROTECTED_TERMS = [
+  '砂金石',
+  '欧泊石',
+  '托帕石',
+  '翡翠石',
+  '龙晶石',
+  '真珠石',
+  // 基石全名，避免被拆成「典贷 + 翡翠」「诡弈 + 砂金」
+  '催讨黄玉',
+  '典贷翡翠',
+  '鉴映珍珠',
+  '征敛舒俱',
+  '诡弈砂金'
+]
+for (const term of PROTECTED_TERMS) {
+  if (seenTerm.has(term)) continue
+  seenTerm.add(term)
+  linkTargets.push({ term, path: '', kind: 'skip', slug: '' })
+}
+
 // 长词优先，保证「星际和平公司」先于「公司」匹配
 linkTargets.sort((a, b) => b.term.length - a.term.length)
 

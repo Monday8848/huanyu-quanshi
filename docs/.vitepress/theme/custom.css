@@ -330,6 +330,12 @@ h1, h2, h3, h4, .hq-serif {
   color: var(--hq-text);
 }
 
+/* 首列多为代号/标签这类短词，禁止逐字断行（如「砂金」被拆成两行） */
+.vp-doc td:first-child,
+.vp-doc th:first-child {
+  white-space: nowrap;
+}
+
 /* 引用 */
 .vp-doc blockquote {
   margin: 1.6rem 0;
@@ -1243,6 +1249,43 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-erow:hover .hq-erow-name {
   color: var(--hq-gold-soft);
+}
+
+/* 下属组织：缩进挂在上级条目之下，用淡金细虚线标示隶属 */
+.hq-erow.is-child {
+  padding-left: 40px;
+  background-image: linear-gradient(
+    to right,
+    rgba(212, 168, 75, 0.16) 0,
+    rgba(212, 168, 75, 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 1px 100%;
+  background-position: 22px 0;
+  background-repeat: no-repeat;
+}
+
+.hq-erow.is-child .hq-erow-name {
+  font-size: 15.5px;
+  font-weight: 500;
+}
+
+.hq-erow.is-child .hq-erow-name::before {
+  content: '└';
+  margin-right: 7px;
+  color: var(--hq-gold-dim);
+  font-family: var(--hq-mono);
+  font-size: 12px;
+}
+
+.hq-erow-parent {
+  font-family: var(--hq-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--hq-gold-dim);
+  padding: 1px 5px;
+  border: 1px dashed rgba(212, 168, 75, 0.28);
+  border-radius: 2px;
 }
 
 .hq-erow-tag {

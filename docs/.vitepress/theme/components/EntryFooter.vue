@@ -32,6 +32,12 @@ const pathByTitle = computed(() => {
   for (const e of entriesData.entries) m[e.title] = e.path
   return m
 })
+
+// 导航项支持两种写法：
+//   字符串  —— 词条名，自动查表；查不到就渲染为灰色待补
+//   对象    —— { text, link }，显式指定链接（用于尚未独立成条、但有锚点的对象）
+const labelOf = it => (typeof it === 'string' ? it : it.text)
+const hrefOf = it => (typeof it === 'string' ? pathByTitle.value[it] : it.link)
 </script>
 
 <template>
@@ -41,13 +47,13 @@ const pathByTitle = computed(() => {
       <div v-for="g in box.groups" :key="g.label" class="hq-navbox-row">
         <span class="hq-navbox-label">{{ g.label }}</span>
         <span class="hq-navbox-items">
-          <template v-for="(it, i) in g.items" :key="it">
+          <template v-for="(it, i) in g.items" :key="labelOf(it)">
             <a
-              v-if="pathByTitle[it]"
-              :href="withBase(pathByTitle[it])"
-              :class="{ current: pathByTitle[it] === currentPath }"
-            >{{ it }}</a>
-            <span v-else class="pending" :title="it + '（条目待补）'">{{ it }}</span>
+              v-if="hrefOf(it)"
+              :href="withBase(hrefOf(it))"
+              :class="{ current: hrefOf(it) === currentPath }"
+            >{{ labelOf(it) }}</a>
+            <span v-else class="pending" :title="labelOf(it) + '（条目待补）'">{{ labelOf(it) }}</span>
             <i v-if="i < g.items.length - 1">·</i>
           </template>
         </span>

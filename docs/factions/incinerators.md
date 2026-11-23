@@ -2,13 +2,15 @@
 title: 焚化工
 type: faction
 summary: 以焚烧记忆为业的忆者分支，认为被烧掉的过去才不会腐烂
+parent: 流光忆庭
 tags:
   faction:
     - 焚化工
+    - 流光忆庭
   location:
     - 匹诺康尼
   path:
-    - 虚无
+    - 记忆
   group:
     - 忆者
 ---
