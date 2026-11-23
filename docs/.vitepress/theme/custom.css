@@ -2,7 +2,7 @@
    寰宇全事 · 星图档案馆主题
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+/* 字体一律走系统栈：外链 Google Fonts 会阻塞首屏样式，且中文字体分片多、加载慢 */
 
 /* ---------- 1. 变量 ---------- */
 html {
@@ -24,9 +24,17 @@ html {
   --hq-line: rgba(212, 168, 75, 0.16);
   --hq-line-soft: rgba(212, 168, 75, 0.08);
 
-  --vp-font-family-base: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --vp-font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --vp-font-family-base: var(--hq-sans);
+  --vp-font-family-mono: var(--hq-mono);
+
+  /* 字体栈：优先系统中已安装的思源/宋体，缺失时逐级回退，不做任何网络加载 */
+  --hq-serif: 'Songti SC', 'Source Han Serif SC', 'Noto Serif CJK SC', 'Noto Serif SC',
+    STSong, SimSun, serif;
+  --hq-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'HarmonyOS Sans SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans SC', var(--hq-sans);
+  --hq-mono: ui-monospace, SFMono-Regular, 'SF Mono', 'JetBrains Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+  --hq-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Songti SC', serif;
 }
 
 .dark {
@@ -52,14 +60,11 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(1100px 620px at 78% -8%, rgba(74, 96, 140, 0.16), transparent 62%),
-    radial-gradient(900px 520px at 8% 12%, rgba(212, 168, 75, 0.05), transparent 60%),
-    var(--hq-bg);
-  background-attachment: fixed;
+  background-color: transparent;
 }
 
-/* 细星点：分层平铺，极慢呼吸 */
+/* 细星点 + 顶部光晕合并成一层静态固定背景：
+   不再对整屏做无限透明度动画，滚动时只合成不重绘 */
 body::before {
   content: '';
   position: fixed;
@@ -72,16 +77,12 @@ body::before {
     radial-gradient(1.3px 1.3px at 88px 188px, rgba(212, 168, 75, 0.4), transparent),
     radial-gradient(1.1px 1.1px at 240px 300px, rgba(232, 228, 217, 0.35), transparent),
     radial-gradient(1.4px 1.4px at 420px 140px, rgba(232, 228, 217, 0.28), transparent),
-    radial-gradient(1.6px 1.6px at 260px 460px, rgba(212, 168, 75, 0.3), transparent);
-  background-size: 320px 320px, 320px 320px, 320px 320px, 420px 420px, 520px 520px, 620px 620px;
-  background-repeat: repeat;
-  opacity: 0.9;
-  animation: hq-twinkle 9s ease-in-out infinite alternate;
-}
-
-@keyframes hq-twinkle {
-  from { opacity: 0.55; }
-  to { opacity: 0.95; }
+    radial-gradient(1.6px 1.6px at 260px 460px, rgba(212, 168, 75, 0.3), transparent),
+    radial-gradient(1100px 620px at 78% -8%, rgba(74, 96, 140, 0.16), transparent 62%),
+    radial-gradient(900px 520px at 8% 12%, rgba(212, 168, 75, 0.05), transparent 60%);
+  background-size: 320px 320px, 320px 320px, 320px 320px, 420px 420px, 520px 520px,
+    620px 620px, 1100px 620px, 900px 520px;
+  background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, no-repeat, no-repeat;
 }
 
 #app,
@@ -107,7 +108,7 @@ body::before {
 
 /* ---------- 3. 字体 ---------- */
 h1, h2, h3, h4, .hq-serif {
-  font-family: 'Noto Serif SC', 'Songti SC', 'Source Han Serif SC', SimSun, serif;
+  font-family: var(--hq-serif);
   letter-spacing: 0.01em;
 }
 
@@ -166,22 +167,19 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 /* ---------- 4. 导航 ---------- */
+/* 不再对导航栏做实时 backdrop-filter：0.9 的深色底已经接近不透明，
+   模糊在视觉上几乎不可见，但滚动时每帧都要采样整条栏下的内容。 */
 .VPNav {
-  background: rgba(10, 14, 26, 0.78) !important;
+  background: rgba(10, 14, 26, 0.92) !important;
   border-bottom: 1px solid var(--hq-line-soft);
 }
 
-/* 模糊必须挂在 VPNavBar 上而不是 VPNav：
-   backdrop-filter 会让元素成为 fixed 子元素的包含块，
-   挂在 VPNav 上会把移动端 .VPNavScreen 压成 0 高（点菜单一片空白）。 */
 .VPNavBar {
   background: transparent !important;
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
 }
 
 .VPNavBarTitle .title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -206,7 +204,7 @@ h1, h2, h3, h4, .hq-serif {
     margin-left: 14px;
     padding-left: 14px;
     border-left: 1px solid var(--hq-line);
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family: var(--hq-sans);
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.18em;
@@ -259,7 +257,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .VPSidebarItem.level-0 > .item > .text {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -319,7 +317,7 @@ h1, h2, h3, h4, .hq-serif {
   border: none;
   border-bottom: 1px solid var(--hq-line);
   padding: 10px 14px;
-  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -346,7 +344,7 @@ h1, h2, h3, h4, .hq-serif {
   padding: 0.3rem 0 0.3rem 1.4rem;
   border-left: 2px solid var(--hq-gold);
   background: linear-gradient(90deg, rgba(212, 168, 75, 0.045), transparent 70%);
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 0.95rem;
   line-height: 1.9;
   color: #cfc9ba;
@@ -367,7 +365,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .custom-block .custom-block-title {
-  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -453,7 +451,7 @@ h1, h2, h3, h4, .hq-serif {
 
 /* 右侧大纲 */
 .VPDocAsideOutline .outline-title {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -490,13 +488,13 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .VPDocFooter .pager-link .title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   color: var(--hq-text);
 }
 
 /* 最后更新 */
 .VPDocFooter .last-updated .message {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--hq-text-3);
@@ -521,7 +519,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-kicker {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11.5px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -540,7 +538,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: clamp(56px, 9vw, 104px);
   font-weight: 700;
   line-height: 1.02;
@@ -555,7 +553,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-sub {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 17px;
   line-height: 1.9;
   color: var(--hq-text-2);
@@ -664,7 +662,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-vol .hq-num {
   display: block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.2em;
   color: var(--hq-gold);
@@ -672,7 +670,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-vol h3 {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 24px;
   font-weight: 600;
   color: #f0ebdd;
@@ -687,7 +685,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-vol .hq-arrow {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 12px;
   color: var(--hq-text-3);
   transition: color 0.3s ease, transform 0.3s ease;
@@ -712,14 +710,14 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-section-title .idx {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.2em;
   color: var(--hq-gold);
 }
 
 .hq-section-title h2 {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 26px;
   margin: 0;
   border: none;
@@ -764,7 +762,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-progress .label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.12em;
   color: var(--hq-text-3);
@@ -806,7 +804,7 @@ h1, h2, h3, h4, .hq-serif {
   position: absolute;
   right: -0.04em;
   top: -0.06em;
-  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-family: var(--hq-display);
   font-size: clamp(150px, 21vw, 280px);
   line-height: 1;
   font-weight: 500;
@@ -821,18 +819,7 @@ h1, h2, h3, h4, .hq-serif {
 .vol-02 .vp-doc h1:first-of-type::before { content: '02'; }
 .vol-03 .vp-doc h1:first-of-type::before { content: '03'; }
 
-/* ---------- 9. 滚动渐入（无 JS 时保持可见） ---------- */
-.hq-js .reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.hq-js .reveal.is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ---------- 9. 滚动渐入：已移除，内容直接可见 ---------- */
 
 /* ---------- 10. 响应式 ---------- */
 @media (max-width: 960px) {
@@ -854,6 +841,8 @@ h1, h2, h3, h4, .hq-serif {
     top: 0;
     width: 78vw;
     opacity: 0.25;
+    /* 手机上 78vw 的元素长期旋转没有视觉收益，只会持续占用合成层 */
+    animation: none;
   }
 
   .hq-volumes {
@@ -906,13 +895,7 @@ h1, h2, h3, h4, .hq-serif {
 
 /* ---------- 11. 减弱动效 ---------- */
 @media (prefers-reduced-motion: reduce) {
-  body::before { animation: none; }
   .hq-astrolabe { animation: none; }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
   * { scroll-behavior: auto !important; }
 }
 
@@ -995,7 +978,7 @@ h1, h2, h3, h4, .hq-serif {
   border: none;
   border-bottom: 1px solid var(--hq-line);
   padding: 10px 14px;
-  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -1054,7 +1037,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-tagline-title {
   display: block;
-  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  font-family: var(--hq-mono);
   font-size: 10.5px;
   letter-spacing: 0.18em;
   color: var(--hq-text-3);
@@ -1142,7 +1125,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-navbox-title {
   padding: 10px 16px;
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -1253,7 +1236,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-erow-name {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 17px;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -1265,7 +1248,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-erow-tag {
-  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  font-family: var(--hq-mono);
   font-size: 10.5px;
   letter-spacing: 0.08em;
   color: var(--hq-gold);
@@ -1299,7 +1282,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-tagindex-lead b {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   color: var(--hq-gold);
   font-weight: 500;
 }
@@ -1324,7 +1307,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-tagindex-nav a span {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 10.5px;
   color: var(--hq-gold-dim);
 }
@@ -1360,7 +1343,7 @@ h1, h2, h3, h4, .hq-serif {
   margin: 0 0 9px;
   padding: 0;
   border: none;
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -1368,7 +1351,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-tagblock h3 .n {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 10.5px;
   font-weight: 400;
   color: var(--hq-gold-dim);
@@ -1402,7 +1385,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-hot-label {
-  font-family: 'JetBrains Mono', 'Noto Sans SC', monospace;
+  font-family: var(--hq-mono);
   font-size: 10.5px;
   letter-spacing: 0.22em;
   color: var(--hq-text-3);
@@ -1433,7 +1416,7 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 .hq-tagcloud-item .c {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 10px;
   color: var(--hq-gold-dim);
 }
@@ -1485,7 +1468,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-owner {
   margin: 26px 0 0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.18em;
   color: rgba(232, 228, 217, 0.3);
@@ -1499,7 +1482,7 @@ h1, h2, h3, h4, .hq-serif {
 .hq-copy {
   margin-left: 10px;
   padding: 2px 8px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 10px;
   letter-spacing: 0.12em;
   color: rgba(212, 168, 75, 0.5);
@@ -1583,7 +1566,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-404-code {
   margin: 0 0 10px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 12px;
   letter-spacing: 0.42em;
   color: var(--hq-gold);
@@ -1591,7 +1574,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-404-title {
   margin: 0 0 12px;
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--hq-serif);
   font-size: clamp(23px, 4vw, 33px);
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -1655,7 +1638,7 @@ h1, h2, h3, h4, .hq-serif {
 
 .hq-boot-text {
   margin: 0;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--hq-mono);
   font-size: 11px;
   letter-spacing: 0.26em;
   color: rgba(232, 228, 217, 0.42);

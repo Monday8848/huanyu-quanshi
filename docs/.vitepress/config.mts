@@ -138,8 +138,6 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}logo.svg` }],
     ['link', { rel: 'apple-touch-icon', href: `${base}logo.svg` }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['meta', { name: 'theme-color', content: '#0a0e1a' }],
     ['meta', { name: 'apple-mobile-web-app-title', content: '寰宇百科' }],
     ['meta', { property: 'og:type', content: 'website' }],

@@ -13,12 +13,26 @@ let removeTimer = null
 onMounted(() => {
   if (typeof window === 'undefined') return
 
-  // 每次整页加载（打开或刷新）播放一次；站内路由切换不重新挂载，不会重复
+  // 每个会话只播一次：刷新、跳转都不再挡内容，避免每次都像卡了一下
+  let booted = false
+  try {
+    booted = sessionStorage.getItem('hq-booted') === '1'
+  } catch {
+    booted = false
+  }
+  if (booted) return
+
+  try {
+    sessionStorage.setItem('hq-booted', '1')
+  } catch {
+    // 隐私模式下不可写，忽略即可
+  }
+
   pick.value = pool[Math.floor(Math.random() * pool.length)]
   show.value = true
 
-  hideTimer = setTimeout(() => { leaving.value = true }, 900)
-  removeTimer = setTimeout(() => { show.value = false }, 1280)
+  hideTimer = setTimeout(() => { leaving.value = true }, 560)
+  removeTimer = setTimeout(() => { show.value = false }, 900)
 })
 
 const dismiss = () => {
