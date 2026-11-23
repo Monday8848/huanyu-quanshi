@@ -83,6 +83,8 @@ for (const file of files) {
     typeLabel: typeInfo.label,
     summary: data.summary || '',
     aliases: Array.isArray(data.aliases) ? data.aliases.filter(Boolean) : [],
+    // 普通词汇组成的角色名（如「火花」）不参与自动内链，避免满页误链
+    noLink: Boolean(data.noLink),
     tags
   })
 
@@ -155,7 +157,8 @@ function pushTerm(term, path, kind, slug) {
 
 for (const e of entries) {
   // 条目主名一律入表。它本身就是专有名词，两字也应可点（砂金、星核、命途）
-  pushTerm(e.title, e.path, 'entry', e.slug)
+  if (!e.noLink) pushTerm(e.title, e.path, 'entry', e.slug)
+  if (e.noLink) continue
   for (const alias of e.aliases) {
     // 别名里的双字词多为通用词（公司、家族），三字以上才自动链，避免误链
     if (alias.length < 3) continue
