@@ -59,18 +59,10 @@ html {
   background: var(--hq-bg);
 }
 
+/* 细星点 + 顶部光晕直接铺在 body 上，不额外开 fixed 图层：
+   移动端滚动时没有需要重新定位的全屏合成层 */
 body {
-  background-color: transparent;
-}
-
-/* 细星点 + 顶部光晕合并成一层静态固定背景：
-   不再对整屏做无限透明度动画，滚动时只合成不重绘 */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+  background-color: var(--hq-bg);
   background-image:
     radial-gradient(1px 1px at 24px 36px, rgba(232, 228, 217, 0.55), transparent),
     radial-gradient(1px 1px at 150px 96px, rgba(232, 228, 217, 0.3), transparent),
@@ -823,6 +815,12 @@ h1, h2, h3, h4, .hq-serif {
 
 /* ---------- 10. 响应式 ---------- */
 @media (max-width: 960px) {
+  /* 手机上不给表情加阴影滤镜：drop-shadow 会让图片每次滚动都重新绘制 */
+  .hq-emoji,
+  .hq-emoji:hover {
+    filter: none;
+  }
+
   .hq-hero {
     flex-direction: column;
     align-items: stretch;
@@ -1595,55 +1593,6 @@ h1, h2, h3, h4, .hq-serif {
   gap: 12px;
 }
 
-/* 首次进入站点的极简加载层：一个会话只出现一次，可点击跳过 */
-
-.hq-boot {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  background: #0a0e1a;
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 0.36s ease, visibility 0.36s ease;
-}
-
-.hq-boot.is-leaving {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.hq-boot-emoji {
-  width: 96px;
-  height: 96px;
-  transform: rotate(-4deg);
-  filter: drop-shadow(0 10px 26px rgba(212, 168, 75, 0.16));
-  animation: hq-boot-in 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) both;
-}
-
-@keyframes hq-boot-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px) rotate(-11deg) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotate(-4deg) scale(1);
-  }
-}
-
-.hq-boot-text {
-  margin: 0;
-  font-family: var(--hq-mono);
-  font-size: 11px;
-  letter-spacing: 0.26em;
-  color: rgba(232, 228, 217, 0.42);
-}
-
 @media (max-width: 768px) {
   .hq-hero-sticker {
     right: 6px;
@@ -1657,20 +1606,11 @@ h1, h2, h3, h4, .hq-serif {
   .hq-404-emoji .hq-emoji {
     width: 118px;
   }
-
-  .hq-boot-emoji {
-    width: 76px;
-    height: 76px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hq-emoji,
   .hq-emoji:hover {
     transition: none;
-  }
-
-  .hq-boot-emoji {
-    animation: none;
   }
 }

@@ -7,14 +7,6 @@
  * 文件放在 docs/public/emoji/，组件按名称拼路径。
  */
 
-// 首次进入的加载层：列车组，负责「调取档案」这件事
-export const bootPool = [
-  'pom-pom',
-  'march-7a',
-  'trailblazer-star',
-  'trailblazer-caelus'
-]
-
 // 404：风堇专场
 export const notFoundPool = [
   'hyacine-happy',

@@ -9,7 +9,6 @@ import TagCloud from './components/TagCloud.vue'
 import TagIndex from './components/TagIndex.vue'
 import HqEmoji from './components/HqEmoji.vue'
 import HqRandomEmoji from './components/HqRandomEmoji.vue'
-import HqBoot from './components/HqBoot.vue'
 import NotFound from './components/NotFound.vue'
 import HqUid from './components/HqUid.vue'
 import './custom.css'
@@ -19,8 +18,6 @@ export default {
 
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      // 首次进入站点时的极简加载层（每个会话一次）
-      'layout-top': () => h(HqBoot),
       // 自定义 404：主题内置的 not-found 插槽
       'not-found': () => h(NotFound),
       // 标签行、导航框与文末声明统一由组件渲染，条目页无需手写
