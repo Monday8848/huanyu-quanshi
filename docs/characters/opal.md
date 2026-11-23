@@ -37,6 +37,7 @@ navbox:
 | 中文 CV | Kinsen |
 | 日文 CV | 岸尾だいすけ |
 | 英文 CV | Paul Castro Jr. |
+| 配音 | Kinsen |
 | 韩文 CV | 정의택 |
 
 ## 外形
