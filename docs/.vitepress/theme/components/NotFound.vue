@@ -1,11 +1,12 @@
 <script setup>
 import { withBase } from 'vitepress'
+import { notFoundPool } from '../../data/emoji-pools'
 </script>
 
 <template>
   <div class="hq-404">
     <div class="hq-404-emoji">
-      <HqRandomEmoji :size="152" :rotate="-4" :interval="2800" />
+      <HqRandomEmoji :set="notFoundPool" :size="152" :rotate="-4" />
     </div>
     <p class="hq-404-code">404</p>
     <h1 class="hq-404-title">这条时间线上没有这一页</h1>

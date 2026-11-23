@@ -13,6 +13,7 @@ import HqEmoji from './components/HqEmoji.vue'
 import HqRandomEmoji from './components/HqRandomEmoji.vue'
 import HqBoot from './components/HqBoot.vue'
 import NotFound from './components/NotFound.vue'
+import HqUid from './components/HqUid.vue'
 import './custom.css'
 
 export default {
@@ -37,6 +38,7 @@ export default {
     app.component('TagIndex', TagIndex)
     app.component('HqEmoji', HqEmoji)
     app.component('HqRandomEmoji', HqRandomEmoji)
+    app.component('HqUid', HqUid)
   },
 
   setup() {

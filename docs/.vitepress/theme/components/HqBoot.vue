@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { withBase } from 'vitepress'
+import { bootPool } from '../../data/emoji-pools'
 
 const show = ref(false)
 const leaving = ref(false)
-const pick = ref('hyacine-happy')
-const pool = ['hyacine-happy', 'hyacine-explain', 'hyacine-think', 'hyacine-hug']
+const pool = bootPool
+const pick = ref(pool[0])
 let hideTimer = null
 let removeTimer = null
 

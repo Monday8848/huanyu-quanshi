@@ -12,7 +12,7 @@ pageClass: home-page
 <a class="hq-btn" href="#categories">开始查阅 <span>→</span></a>
 <a class="hq-btn ghost" href="./tags">标签索引</a>
 </div>
-<p class="hq-owner">站主 UID <span>110325153</span></p>
+<HqUid />
 </div>
 <svg class="hq-astrolabe" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <circle cx="210" cy="210" r="196" stroke="#D4A84B" stroke-opacity="0.16"/>
