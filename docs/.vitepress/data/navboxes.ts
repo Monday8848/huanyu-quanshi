@@ -80,21 +80,38 @@ const navboxes: Record<string, NavBox> = {
     title: '星核猎手',
     groups: [
       {
-        label: '已知成员',
-        items: ['艾利欧', '卡芙卡', '刃', '银狼', '流萤']
+        label: '成员',
+        items: [
+          { text: '艾利欧', link: '/factions/stellaron-hunters#通缉令' },
+          '卡芙卡',
+          '流萤',
+          '刃',
+          { text: '银狼', link: '/factions/stellaron-hunters#悬赏' },
+          '开拓者'
+        ]
       }
     ],
-    note: '首领艾利欧从未正式登场。'
+    note: '首领艾利欧从未正式登场；银狼暂无独立条目。'
   },
   family: {
     title: '家族',
     groups: [
       {
         label: '家系',
-        items: ['橡木家系', '猎犬家系', '苜蓿家系', '鸢尾花家系']
+        items: [
+          { text: '橡木家系', link: '/factions/family#五大家系' },
+          { text: '猎犬家系', link: '/factions/family#五大家系' },
+          { text: '鸢尾花家系', link: '/factions/family#五大家系' },
+          { text: '苜蓿草家系', link: '/factions/family#五大家系' },
+          { text: '隐夜鸫家系', link: '/factions/family#五大家系' }
+        ]
+      },
+      {
+        label: '成员',
+        items: ['知更鸟', '星期日']
       }
     ],
-    note: '匹诺康尼由五大家系共治，官方尚未完整公开全部家系。'
+    note: '五大家系的分工与家主见本页。'
   },
   xianzhou: {
     title: '仙舟联盟',
