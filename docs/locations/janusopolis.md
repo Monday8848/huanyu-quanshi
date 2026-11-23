@@ -1,6 +1,8 @@
 ---
 title: 雅努萨波利斯
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 信仰门径泰坦雅努斯的宗教圣地，翁法罗斯地理与神谕的中心
 aliases:
   - 命运重渊

@@ -1,6 +1,8 @@
 ---
 title: 奥赫玛
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 刻法勒庇佑下的「永恒圣城」，黑潮时代人类最后的避难所
 aliases:
   - 永恒圣城

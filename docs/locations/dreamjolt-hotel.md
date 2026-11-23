@@ -1,6 +1,8 @@
 ---
 title: 白日梦酒店
 type: location
+parent: 匹诺康尼
+parentLabel: 位于
 summary: 匹诺康尼的门面与入口，游客在这里办理入梦手续，从现实走进梦境
 tags:
   faction:

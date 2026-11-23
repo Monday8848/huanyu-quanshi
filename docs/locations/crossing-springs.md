@@ -1,6 +1,8 @@
 ---
 title: 渡画泉隐
 type: location
+parent: 二相乐园
+parentLabel: 位于
 summary: 画中世界与现实的交界，幻造种在这里告别现实、了却尘缘
 tags:
   faction:

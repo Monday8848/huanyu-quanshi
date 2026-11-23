@@ -43,7 +43,7 @@ function subTags(entry) {
     <a v-for="e in items" :key="e.slug" class="hq-erow" :class="{ 'is-child': e.parentSlug }" :href="withBase(e.path)">
       <span class="hq-erow-head">
         <span class="hq-erow-name">{{ e.title }}</span>
-        <span v-if="e.parent" class="hq-erow-parent">隶属 · {{ e.parent }}</span>
+        <span v-if="e.parent" class="hq-erow-parent">{{ e.parentLabel || '隶属' }} · {{ e.parent }}</span>
         <span v-for="s in subTags(e)" :key="s.dim" class="hq-erow-tag">{{ s.text }}</span>
       </span>
       <span v-if="e.summary" class="hq-erow-sum">{{ e.summary }}</span>

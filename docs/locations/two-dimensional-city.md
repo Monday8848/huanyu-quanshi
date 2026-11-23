@@ -1,6 +1,8 @@
 ---
 title: 二维市
 type: location
+parent: 二相乐园
+parentLabel: 位于
 summary: 二相乐园最繁华的城市，泊地站、绘世学院与鸽川区都在这里
 tags:
   faction:

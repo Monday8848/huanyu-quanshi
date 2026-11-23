@@ -1,6 +1,8 @@
 ---
 title: 神悟树庭
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 信仰理性泰坦瑟希斯的学术之城，树庭七学派与那刻夏的故乡
 aliases:
   - 呓语密林

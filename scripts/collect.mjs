@@ -87,6 +87,8 @@ for (const file of files) {
     noLink: Boolean(data.noLink),
     // 隶属关系：下属组织在索引与侧栏中缩进挂在上级之下，不再与上级并列
     parent: typeof data.parent === 'string' ? data.parent.trim() : '',
+    // 隶属关系的显示词：组织用「隶属」，地点用「位于」
+    parentLabel: typeof data.parentLabel === 'string' ? data.parentLabel.trim() : '',
     parentSlug: '',
     tags
   })

@@ -1,6 +1,8 @@
 ---
 title: 哀丽秘榭
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 永夜之帷庇护下的边陲村庄，白厄与昔涟的故乡
 tags:
   faction:

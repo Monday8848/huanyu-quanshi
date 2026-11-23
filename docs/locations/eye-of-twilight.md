@@ -1,6 +1,8 @@
 ---
 title: 晨昏之眼
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 栖居天空泰坦艾格勒神体的空中要塞，烈阳、雷雨、霜雪三族争夺神宠
 aliases:
   - 穹顶关塞

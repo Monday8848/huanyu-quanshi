@@ -1,6 +1,8 @@
 ---
 title: 贝洛伯格
 type: location
+parent: 雅利洛-VI
+parentLabel: 位于
 summary: 雅利洛-VI 仅存的城市，靠星核的热量撑过永冬，上层与下层被一道封闭的通道隔开
 tags:
   location:

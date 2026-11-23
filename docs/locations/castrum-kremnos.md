@@ -1,6 +1,8 @@
 ---
 title: 悬锋城
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 信仰纷争泰坦尼卡多利的移动要塞，以战死为荣的战士之城
 aliases:
   - 纷争荒墟

@@ -1,6 +1,8 @@
 ---
 title: 鳞渊境
 type: location
+parent: 罗浮
+parentLabel: 位于
 summary: 罗浮之上持明族的领地，水与洞天交错，龙尊传承之地，也是丹恒必须回去的地方
 tags:
   faction:

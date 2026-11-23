@@ -1,6 +1,8 @@
 ---
 title: 斯缇科西亚
 type: location
+parent: 翁法罗斯
+parentLabel: 位于
 summary: 信仰海洋泰坦法吉娜的海滨城邦，海瑟音与遐蝶的故乡
 aliases:
   - 龙骸古城
