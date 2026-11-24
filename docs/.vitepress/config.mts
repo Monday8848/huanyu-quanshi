@@ -168,8 +168,10 @@ export default defineConfig({
   appearance: 'dark',
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}logo.svg` }],
-    ['link', { rel: 'apple-touch-icon', href: `${base}logo.svg` }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: `${base}favicon-32.png` }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: `${base}favicon-16.png` }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: `${base}favicon-64.png` }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: `${base}apple-touch-icon.png` }],
     ['meta', { name: 'theme-color', content: '#0a0e1a' }],
     ['meta', { name: 'apple-mobile-web-app-title', content: '寰宇百科' }],
     ['meta', { property: 'og:type', content: 'website' }],
@@ -197,7 +199,7 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/logo.svg',
+    logo: '/logo.png',
     siteTitle: '寰宇百科',
 
     nav: [
