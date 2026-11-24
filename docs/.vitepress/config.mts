@@ -96,6 +96,36 @@ function buildSidebar() {
           items
         })
       }
+    } else if (dir === 'items') {
+      // 物品同样量大（光锥 150+）：按集合分组折叠，零散单件并入「其他」
+      const groupMap = new Map<string, typeof own>()
+      for (const e of data.entries) {
+        if (!e.slug.startsWith(dir + '/')) continue
+        const gs = e.tags?.group?.length ? e.tags.group : ['其他']
+        for (const k of gs) {
+          if (!groupMap.has(k)) groupMap.set(k, [])
+          groupMap.get(k)!.push({ text: e.parentSlug ? `　└ ${e.title}` : e.title, link: e.path })
+        }
+      }
+      const big: Array<{ text: string; items: typeof own }> = []
+      const misc: typeof own = []
+      for (const [k, items] of [...groupMap.entries()].sort(
+        ([a], [b]) => (groupMap.get(b)!.length - groupMap.get(a)!.length)
+      )) {
+        if (items.length >= 3 && k !== '其他')
+          big.push({ text: `${k} · ${items.length}`, items })
+        else misc.push(...items)
+      }
+      groups.push({
+        text: `${label} · ${count} 条`,
+        items: [{ text: '总览', link: `/${dir}/` }]
+      })
+      for (const g of big) {
+        groups.push({ text: g.text, collapsed: true, items: g.items })
+      }
+      if (misc.length) {
+        groups.push({ text: `其他 · ${misc.length}`, collapsed: true, items: misc })
+      }
     } else {
       groups.push({
         text: `${label} · ${count} 条`,

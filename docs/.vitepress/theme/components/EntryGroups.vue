@@ -13,6 +13,8 @@ const props = defineProps({
   // 组的固定顺序，中文顿号分隔；未列出的组按条目数排在后面，最后是「其他」
   order: { type: String, default: '' },
   fallback: { type: String, default: '其他' },
+  // 少于该条数的组并入 fallback 组，避免零散小组刷屏
+  minGroup: { type: Number, default: 0 },
   search: { type: Boolean, default: true }
 })
 
@@ -56,6 +58,16 @@ for (const e of allItems) {
   const key = groupKeyOf(e)
   if (!buckets.has(key)) buckets.set(key, [])
   buckets.get(key).push(e)
+}
+// 零散小组并入 fallback
+if (props.minGroup > 0) {
+  for (const [key, items] of [...buckets.entries()]) {
+    if (key !== props.fallback && items.length < props.minGroup) {
+      if (!buckets.has(props.fallback)) buckets.set(props.fallback, [])
+      buckets.get(props.fallback).push(...items)
+      buckets.delete(key)
+    }
+  }
 }
 const ordered = []
 for (const key of props.order.split('、').map(s => s.trim()).filter(Boolean)) {
