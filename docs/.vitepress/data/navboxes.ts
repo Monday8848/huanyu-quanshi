@@ -86,12 +86,48 @@ const navboxes: Record<string, NavBox> = {
           '卡芙卡',
           '流萤',
           '刃',
-          { text: '银狼', link: '/factions/stellaron-hunters#悬赏' },
+          { text: '银狼', link: '/characters/silver-wolf' },
           '开拓者'
         ]
       }
     ],
-    note: '首领艾利欧从未正式登场；银狼暂无独立条目。'
+    note: '首领艾利欧从未正式登场。'
+  },
+  station: {
+    title: '空间站「黑塔」',
+    groups: [
+      {
+        label: '人物',
+        items: ['黑塔', '大黑塔', '艾丝妲', '阿兰']
+      },
+      {
+        label: '相关',
+        items: [
+          { text: '黑塔空间站', link: '/locations/herta-space-station' },
+          { text: '空间站危机', link: '/events/space-station-crisis' },
+          { text: '星核', link: '/items/star-core' }
+        ]
+      }
+    ]
+  },
+  belobog: {
+    title: '贝洛伯格',
+    groups: [
+      {
+        label: '人物',
+        items: ['可可利亚', '布洛妮娅', '杰帕德', '希露瓦', '佩拉', '娜塔莎', '虎克', '史瓦罗', '希儿', '克拉拉']
+      },
+      {
+        label: '势力与概念',
+        items: [
+          { text: '贝洛伯格', link: '/locations/belobog' },
+          { text: '银鬃铁卫', link: '/factions/silvermane-guard' },
+          { text: '地火', link: '/factions/wildfire' },
+          { text: '裂界', link: '/concepts/fragmentum' },
+          { text: '雅利洛永冬', link: '/events/jarilo-winter' }
+        ]
+      }
+    ]
   },
   family: {
     title: '家族',
@@ -182,6 +218,18 @@ const navboxes: Record<string, NavBox> = {
       {
         label: '相关势力',
         items: ['星际和平公司', '假面愚者', '巡海游侠', '星穹列车', '悲悼伶人']
+      },
+      {
+        label: '相关地点与概念',
+        items: [
+          { text: '二维市', link: '/locations/two-dimensional-city' },
+          { text: '渡画泉隐', link: '/locations/crossing-springs' },
+          { text: '幻造种', link: '/concepts/phantom-species' },
+          { text: '愿力', link: '/concepts/wish-power' },
+          { text: '幻月游戏', link: '/concepts/moon-hunt-game' },
+          { text: '新一届幻月游戏', link: '/events/moon-hunt-4x' },
+          { text: '血涂游戏', link: '/events/blood-painted-game' }
+        ]
       }
     ],
     note: '幻月游戏每届八位谒者，名单随剧情推进而变化。'

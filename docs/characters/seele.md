@@ -15,6 +15,8 @@ tags:
     - 巡猎
   group:
     - 地火
+navbox:
+  - belobog
 ---
 
 # 希儿

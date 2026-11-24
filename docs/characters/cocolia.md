@@ -15,6 +15,8 @@ tags:
     - 毁灭
   group:
     - 大守护者
+navbox:
+  - belobog
 ---
 
 # 可可利亚

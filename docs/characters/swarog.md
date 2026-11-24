@@ -13,6 +13,8 @@ tags:
     - 存护
   group:
     - 机械聚落
+navbox:
+  - belobog
 ---
 
 # 史瓦罗

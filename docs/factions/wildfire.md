@@ -12,6 +12,8 @@ tags:
     - 贝洛伯格
   group:
     - 下层区
+navbox:
+  - belobog
 ---
 
 # 地火

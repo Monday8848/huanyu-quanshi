@@ -13,6 +13,8 @@ tags:
     - 毁灭
   group:
     - 下层区
+navbox:
+  - belobog
 ---
 
 # 克拉拉

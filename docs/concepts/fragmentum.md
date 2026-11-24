@@ -12,6 +12,8 @@ tags:
     - 空间站「黑塔」
   group:
     - 星核
+navbox:
+  - belobog
 ---
 
 # 裂界

@@ -13,6 +13,8 @@ tags:
     - 存护
   group:
     - 银鬃铁卫
+navbox:
+  - belobog
 ---
 
 # 杰帕德

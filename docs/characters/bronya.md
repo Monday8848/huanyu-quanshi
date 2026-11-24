@@ -14,6 +14,8 @@ tags:
     - 同谐
   group:
     - 大守护者
+navbox:
+  - belobog
 ---
 
 # 布洛妮娅

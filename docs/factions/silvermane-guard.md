@@ -11,6 +11,8 @@ tags:
     - 贝洛伯格
   group:
     - 大守护者
+navbox:
+  - belobog
 ---
 
 # 银鬃铁卫

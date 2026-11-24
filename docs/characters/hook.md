@@ -14,6 +14,8 @@ tags:
     - 毁灭
   group:
     - 鼹鼠党
+navbox:
+  - belobog
 ---
 
 # 虎克

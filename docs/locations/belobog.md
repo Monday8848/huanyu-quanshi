@@ -11,6 +11,8 @@ tags:
     - 存护
   group:
     - 上下层区
+navbox:
+  - belobog
 ---
 
 # 贝洛伯格
