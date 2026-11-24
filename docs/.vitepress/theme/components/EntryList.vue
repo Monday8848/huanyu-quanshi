@@ -18,7 +18,11 @@ const bySlug = computed(() => {
 
 const items = computed(() => {
   let slugs = []
-  if (props.type) slugs = entriesData.typeIndex[props.type]?.items || []
+  if (props.type && props.dim && props.tag) {
+    // 类型 + 标签联用：书籍总览按地区分组时，只列该地区下的书籍
+    const typeSet = new Set(entriesData.typeIndex[props.type]?.items || [])
+    slugs = (entriesData.tagIndex[props.dim]?.[props.tag] || []).filter(s => typeSet.has(s))
+  } else if (props.type) slugs = entriesData.typeIndex[props.type]?.items || []
   else if (props.dim && props.tag) slugs = entriesData.tagIndex[props.dim]?.[props.tag] || []
   return slugs.map(s => bySlug.value[s]).filter(Boolean)
 })

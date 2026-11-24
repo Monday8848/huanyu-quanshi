@@ -1657,3 +1657,22 @@ h1, h2, h3, h4, .hq-serif {
     transition: none;
   }
 }
+
+/* 书籍词条：黑幕遮罩（原文中的剧透遮蔽内容，悬停可读） */
+.heimu {
+  background-color: #1a1a1a;
+  color: transparent;
+  transition: color 0.2s ease;
+  cursor: help;
+}
+
+.heimu:hover,
+.heimu:active {
+  color: #e8e4d9;
+}
+
+/* 书籍词条：注音（原文上方小字标注） */
+.vp-doc ruby rt {
+  font-size: 0.62em;
+  color: var(--vp-c-text-3);
+}

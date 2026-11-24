@@ -26,7 +26,8 @@ const TYPE_MAP = {
   locations: { key: 'location', label: '地点' },
   concepts: { key: 'concept', label: '概念' },
   events: { key: 'event', label: '事件' },
-  items: { key: 'item', label: '物品' }
+  items: { key: 'item', label: '物品' },
+  books: { key: 'book', label: '书籍' }
 }
 
 /** 标签维度 → 中文名，顺序即展示顺序 */
@@ -34,7 +35,8 @@ const TAG_DIMS = {
   faction: '势力',
   location: '星球 / 地区',
   path: '命途',
-  group: '集合'
+  group: '集合',
+  kind: '文体'
 }
 
 const collator = new Intl.Collator('zh-Hans-CN')

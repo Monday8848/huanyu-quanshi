@@ -40,7 +40,8 @@ const DIRS = [
   { dir: 'locations', label: '地点', type: 'location', dims: ['location', 'faction'] },
   { dir: 'concepts', label: '概念', type: 'concept', dims: ['group'] },
   { dir: 'events', label: '事件', type: 'event', dims: ['location', 'faction'] },
-  { dir: 'items', label: '物品', type: 'item', dims: ['group', 'location'] }
+  { dir: 'items', label: '物品', type: 'item', dims: ['group', 'location'] },
+  { dir: 'books', label: '书籍', type: 'book', dims: ['kind', 'location'] }
 ]
 
 function buildSidebar() {
@@ -68,12 +69,39 @@ function buildSidebar() {
       .map(e => ({ text: e.parentSlug ? `　└ ${e.title}` : e.title, link: e.path }))
 
     const groups: unknown[] = [
-      siteGroup,
-      {
+      siteGroup
+    ]
+
+    if (dir === 'books') {
+      // 书籍 688 条不适合平铺：按文体分组折叠，组内再列条目
+      const kindMap = new Map<string, typeof own>()
+      for (const e of data.entries) {
+        if (!e.slug.startsWith(dir + '/')) continue
+        for (const k of e.tags?.kind || []) {
+          if (!kindMap.has(k)) kindMap.set(k, [])
+          kindMap.get(k)!.push({ text: e.parentSlug ? `　└ ${e.title}` : e.title, link: e.path })
+        }
+      }
+      const sorted = [...kindMap.entries()].sort(
+        ([a], [b]) => (kindMap.get(b)!.length - kindMap.get(a)!.length)
+      )
+      groups.push({
+        text: `${label} · ${count} 条`,
+        items: [{ text: '总览', link: `/${dir}/` }]
+      })
+      for (const [k, items] of sorted) {
+        groups.push({
+          text: `${k} · ${items.length}`,
+          collapsed: true,
+          items
+        })
+      }
+    } else {
+      groups.push({
         text: `${label} · ${count} 条`,
         items: [{ text: '总览', link: `/${dir}/` }, ...own]
-      }
-    ]
+      })
+    }
 
     // 当前目录下出现过的标签，每个维度按条目数取前 6 个
     const seen = new Map<string, { dim: string; name: string; count: number }>()
@@ -94,7 +122,9 @@ function buildSidebar() {
     )
 
     // 严格按 dims 声明顺序分组，组内按条目数排序
-    for (const dim of dims) {
+    // 书籍的 kind 已用词条列表分组呈现，这里只保留地区标签组
+    const dimList = dir === 'books' ? dims.filter(d => d !== 'kind') : dims
+    for (const dim of dimList) {
       const group = sorted.filter(t => t.dim === dim).slice(0, 6)
       if (!group.length) continue
       groups.push({
@@ -178,6 +208,7 @@ export default defineConfig({
       { text: '概念', link: '/concepts/' },
       { text: '事件', link: '/events/' },
       { text: '物品', link: '/items/' },
+      { text: '书籍', link: '/books/' },
       { text: '标签', link: '/tags/' }
     ],
 

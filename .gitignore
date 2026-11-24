@@ -7,3 +7,4 @@ docs/.vitepress/cache/
 # 构建前由 scripts/collect.mjs 生成，不入库
 docs/.vitepress/data/entries.json
 raw/
+__pycache__/
