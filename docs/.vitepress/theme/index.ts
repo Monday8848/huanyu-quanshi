@@ -3,6 +3,7 @@ import type { Theme } from 'vitepress'
 import { h } from 'vue'
 import EntryFooter from './components/EntryFooter.vue'
 import EntryList from './components/EntryList.vue'
+import EntryGroups from './components/EntryGroups.vue'
 import EntryCount from './components/EntryCount.vue'
 import ProgressBar from './components/ProgressBar.vue'
 import TagCloud from './components/TagCloud.vue'
@@ -27,6 +28,7 @@ export default {
 
   enhanceApp({ app }) {
     app.component('EntryList', EntryList)
+    app.component('EntryGroups', EntryGroups)
     app.component('EntryCount', EntryCount)
     app.component('ProgressBar', ProgressBar)
     app.component('TagCloud', TagCloud)

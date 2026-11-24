@@ -1314,6 +1314,134 @@ h1, h2, h3, h4, .hq-serif {
 }
 
 /* ============================================================
+   14b. 分组折叠总览（EntryGroups：大分类页专用）
+   组头常驻，条目展开时才渲染——控制整页 DOM 规模
+   ============================================================ */
+.hq-egroups {
+  margin: 1.6rem 0 2.2rem;
+}
+
+.hq-egroup-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hq-egroup-search input {
+  flex: 1;
+  max-width: 460px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--hq-text);
+  background: rgba(212, 168, 75, 0.04);
+  border: 1px solid rgba(212, 168, 75, 0.22);
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.22s ease;
+}
+
+.hq-egroup-search input:focus {
+  border-color: rgba(212, 168, 75, 0.55);
+}
+
+.hq-egroup-hint {
+  font-size: 12.5px;
+  color: var(--hq-text-3);
+  white-space: nowrap;
+}
+
+.hq-egroup-actions {
+  margin-bottom: 14px;
+}
+
+.hq-egroup-toggleall {
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: var(--hq-gold-dim);
+  background: transparent;
+  border: 1px dashed rgba(212, 168, 75, 0.3);
+  border-radius: 3px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: color 0.22s ease, border-color 0.22s ease;
+}
+
+.hq-egroup-toggleall:hover {
+  color: var(--hq-gold);
+  border-color: rgba(212, 168, 75, 0.55);
+}
+
+.hq-egroup {
+  border: 1px solid rgba(212, 168, 75, 0.14);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.hq-egroup.is-open {
+  border-color: rgba(212, 168, 75, 0.3);
+}
+
+.hq-egroup-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--hq-serif);
+  background: rgba(212, 168, 75, 0.03);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.22s ease;
+}
+
+.hq-egroup-head.is-static {
+  cursor: default;
+}
+
+.hq-egroup-head:hover {
+  background: rgba(212, 168, 75, 0.07);
+}
+
+.hq-egroup-head.is-static:hover {
+  background: rgba(212, 168, 75, 0.03);
+}
+
+.hq-egroup-arrow {
+  font-size: 12px;
+  color: var(--hq-gold-dim);
+  transition: transform 0.18s ease;
+}
+
+.hq-egroup.is-open .hq-egroup-arrow {
+  transform: rotate(90deg);
+}
+
+.hq-egroup-name {
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--hq-text);
+}
+
+.hq-egroup-count {
+  margin-left: auto;
+  font-family: var(--hq-mono);
+  font-size: 12px;
+  color: var(--hq-text-3);
+}
+
+.hq-egroup-body {
+  border-top: 1px solid rgba(212, 168, 75, 0.1);
+}
+
+.hq-egroup-body .hq-erow:first-child {
+  border-top: none;
+}
+
+/* ============================================================
    15. 标签索引页
    ============================================================ */
 .hq-tagindex-lead {

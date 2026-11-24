@@ -9,35 +9,13 @@ title: 书籍
 
 游戏内全部官方阅读物的原文收录：正式书籍、信件、日记便条、石碑铭刻、录音录像制品，一册一条，正文展开即读。
 
-共 <EntryCount type="book" /> 条，按获得地区分组。游戏内编号与实装版本随词条附注；获得方式写在每个分卷开头。
+共 <EntryCount type="book" /> 条，按获得地区分组，点击组名展开。游戏内编号与实装版本随词条附注；获得方式写在每个分卷开头。
 
-## 空间站「黑塔」
-
-<EntryList type="book" dim="location" tag="空间站「黑塔」" />
-
-## 雅利洛-Ⅵ
-
-<EntryList type="book" dim="location" tag="雅利洛-Ⅵ" />
-
-## 仙舟「罗浮」
-
-<EntryList type="book" dim="location" tag="仙舟「罗浮」" />
-
-## 匹诺康尼
-
-<EntryList type="book" dim="location" tag="匹诺康尼" />
-
-## 翁法罗斯
-
-<EntryList type="book" dim="location" tag="翁法罗斯" />
-
-## 二相乐园
-
-<EntryList type="book" dim="location" tag="二相乐园" />
-
-## 其他
-
-<EntryList type="book" dim="location" tag="其他" />
+<EntryGroups
+  type="book"
+  groupDim="location"
+  order="空间站「黑塔」、雅利洛-Ⅵ、仙舟「罗浮」、匹诺康尼、翁法罗斯、二相乐园"
+/>
 
 ## 收录边界
 
