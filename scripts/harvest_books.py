@@ -401,6 +401,10 @@ def main():
         force_titles = sys.argv[i + 1:]
 
     OUT.mkdir(exist_ok=True)
+    # 清理上一次生成的词条文件（保留手写的 index.md）
+    for old in OUT.glob('*.md'):
+        if old.name != 'index.md':
+            old.unlink()
     files = find_book_files()
     print(f'[harvest] 发现书籍页 {len(files)} 个')
 

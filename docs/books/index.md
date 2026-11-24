@@ -1,0 +1,50 @@
+---
+prev: false
+next: false
+aside: false
+title: 书籍
+---
+
+# 书籍
+
+游戏内全部官方阅读物的原文收录：正式书籍、信件、日记便条、石碑铭刻、录音录像制品，一册一条，正文展开即读。
+
+共 <EntryCount type="book" /> 条，按获得地区分组。游戏内编号与实装版本随词条附注；获得方式写在每个分卷开头。
+
+## 空间站「黑塔」
+
+<EntryList type="book" dim="location" tag="空间站「黑塔」" />
+
+## 雅利洛-Ⅵ
+
+<EntryList type="book" dim="location" tag="雅利洛-Ⅵ" />
+
+## 仙舟「罗浮」
+
+<EntryList type="book" dim="location" tag="仙舟「罗浮」" />
+
+## 匹诺康尼
+
+<EntryList type="book" dim="location" tag="匹诺康尼" />
+
+## 翁法罗斯
+
+<EntryList type="book" dim="location" tag="翁法罗斯" />
+
+## 二相乐园
+
+<EntryList type="book" dim="location" tag="二相乐园" />
+
+## 其他
+
+<EntryList type="book" dim="location" tag="其他" />
+
+## 收录边界
+
+- **收录的**：游戏内「书籍」系统下的全部阅读物——含散落于地图、未被书架收录的剧情阅读物（编号 4999 / 6999 的聚合册）。
+- **不收录的**：短信聊天记录（与角色词条重叠）、站外官方出版物（漫画、设定集）。
+- 原文按 BWIKI 转录文本整理，与 TextMap 官方文本交叉校验中；如发现错漏，以游戏内原文为准。
+
+---
+
+> 原文出自《崩坏：星穹铁道》游戏内阅读物，文字版权归米哈游所有。本页仅作学习研究用途。
