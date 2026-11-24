@@ -39,43 +39,43 @@ pageClass: home-page
 <a class="hq-vol" href="./characters/">
 <span class="hq-num">01 / 人物</span>
 <h3>谁是谁</h3>
-<p>自机角色与重量级 NPC，按所属势力分组。查到一个人的同时，也就看到了他的同僚和对手。</p>
+<p>自机角色与剧情重量级 NPC，按所属势力分组。</p>
 <span class="hq-arrow"><EntryCount type="character" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./factions/">
 <span class="hq-num">02 / 势力</span>
 <h3>谁在管谁</h3>
-<p>公司、仙舟联盟、家族、星核猎手、星穹列车。按影响力排序，条内附组织架构与关系网。</p>
+<p>公司、仙舟联盟、家族、星核猎手、星穹列车，条内附组织架构与关系网。</p>
 <span class="hq-arrow"><EntryCount type="faction" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./locations/">
 <span class="hq-num">03 / 地点</span>
 <h3>故事在哪发生</h3>
-<p>星球与区域，按星球分组。地理、管辖势力、本地发生过的关键事件都收在一条里。</p>
+<p>星球与区域，按星球分组，管辖势力与本地大事收在一条里。</p>
 <span class="hq-arrow"><EntryCount type="location" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./concepts/">
 <span class="hq-num">04 / 概念</span>
 <h3>名词是什么</h3>
-<p>星神、命途、令使、忆质。被设定术语绕晕的时候，从这里查起。</p>
+<p>星神、命途、令使、忆质。被术语绕晕时，从这里查起。</p>
 <span class="hq-arrow"><EntryCount type="concept" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./events/">
 <span class="hq-num">05 / 事件</span>
 <h3>发生过什么</h3>
-<p>主线章节级事件与重大历史事件，按时间顺序排列，每条标清时间、地点、参与方与后续影响。</p>
+<p>主线章节级事件与重大历史事件，按时间排列。</p>
 <span class="hq-arrow"><EntryCount type="event" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./items/">
 <span class="hq-num">06 / 物品</span>
 <h3>东西是什么</h3>
-<p>星核、星琼这类有来历的物件单独成条；光锥、遗器、材料收在总表里，可搜索筛选。</p>
+<p>星核、星琼这类有来历的物件单独成条；光锥、遗器、材料收在总表，可搜索筛选。</p>
 <span class="hq-arrow"><EntryCount type="item" /> 条已收录 →</span>
 </a>
 <a class="hq-vol" href="./books/">
 <span class="hq-num">07 / 书籍</span>
 <h3>官方写了什么</h3>
-<p>游戏内全部阅读物原文：《星神论》《大敌名录》、仙舟通鉴、各处信件与录音。一册一条，正文展开即读。</p>
+<p>游戏内全部阅读物原文：《星神论》《大敌名录》、信件与录音，一册一条，展开即读。</p>
 <span class="hq-arrow"><EntryCount type="book" /> 条已收录 →</span>
 </a>
 </div>
@@ -86,37 +86,36 @@ pageClass: home-page
 </div>
 
 <div class="hq-section">
-<div class="hq-section-title"><span class="idx">01</span><h2>这本百科的写法</h2></div>
+<div class="hq-section-title"><h2>这本百科的写法</h2></div>
 
-三条规则，所有条目都遵守：
+三条规则，所有条目遵守：
 
-**一、官方记载是基准。** 游戏内文本（主线对话、书籍、角色故事、遗器与光锥文案、地图标记、短信）、官方 PV 与前瞻直播、官方公告与访谈——只有这些算「明确公布」的内容。拆包数据、内鬼爆料、玩家 wiki 一律不进正文。
+**一、官方记载是基准。** 游戏内文本（主线对话、书籍、角色故事、光锥与遗器文案、地图标记、短信）、官方 PV 与前瞻直播、官方公告访谈，才算「明确公布」。拆包数据、内鬼爆料、玩家 wiki 不进正文。
 
-**二、推测混写，但会声明。** 玩家基于文本矛盾做出的合理推断，直接写进正文对应位置，读起来是连贯的；每个条目末尾统一声明「本文含玩家推测」，不做逐条标注。没有推理依据的猜测不收。
+**二、推测混写，但会声明。** 玩家基于文本矛盾做出的合理推断直接写进正文；每个条目末尾统一声明「本文含玩家推测」。没有依据的猜测不收。
 
-**三、版本冲突并列。** 官方在不同版本里表述不一致时，两种说法都写出来并注明，不替官方圆场。
+**三、版本冲突并列。** 官方在不同版本说法不一，两种都写出来注明，不替官方圆场。
 
 </div>
 
 <div class="hq-section">
-<div class="hq-section-title"><span class="idx">02</span><h2>怎么找到你要的东西</h2></div>
+<div class="hq-section-title"><h2>怎么找到你要的东西</h2></div>
 
 | 你的情况 | 走这条路 |
 |----------|---------|
-| 记得名字（砂金、匹诺康尼、星核） | 右上角搜索，或直接 Ctrl K |
-| 只记得「某个公司/某个星球」 | 点顶部七大类，或直接翻[标签索引](./tags) |
-| 想知道某个词条和谁有关 | 每个条目底部都有分类标签，点标签顺着一张网走下去 |
-| 想按时间顺序看发生了什么 | [事件总览](./events/) 按时间排列 |
-| 只想翻道具数据 | [物品总表](./items/) |
+| 记得名字（砂金、匹诺康尼、星核） | 右上角搜索，或 Ctrl K |
+| 只记得「某个公司/某个星球」 | 顶部七大类，或[标签索引](./tags) |
+| 想知道某个词条和谁有关 | 条目底部的分类标签，顺着点 |
+| 想按时间顺序看 | [事件总览](./events/) |
 
 </div>
 
 <div class="hq-section">
-<div class="hq-section-title"><span class="idx">03</span><h2>当前进度</h2></div>
+<div class="hq-section-title"><h2>当前进度</h2></div>
 
 <ProgressBar />
 
-七类骨架已完成，当前收录 <EntryCount of="total" /> 条，覆盖黑塔空间站、雅利洛-VI、仙舟罗浮、匹诺康尼、翁法罗斯的人物、势力、地点、概念、事件、物品与官方阅读物全文。其余条目按「高频优先」顺序补齐，内容跟随游戏大版本增量更新，小活动不追。
+七类骨架已齐，当前收录 <EntryCount of="total" /> 条，覆盖黑塔空间站到二相乐园的全部开放地区。其余条目按「高频优先」补齐，跟随游戏大版本更新，小活动不追。
 
 </div>
 

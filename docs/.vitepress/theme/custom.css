@@ -707,13 +707,6 @@ h1, h2, h3, h4, .hq-serif {
   margin-bottom: 26px;
 }
 
-.hq-section-title .idx {
-  font-family: var(--hq-mono);
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--hq-gold);
-}
-
 .hq-section-title h2 {
   font-family: var(--hq-serif);
   font-size: 26px;
